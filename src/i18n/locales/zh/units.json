@@ -1,0 +1,135 @@
+{
+  "unit-0": {
+    "title": "学前准备",
+    "description": "安装 Python 环境，了解本教材的使用方法。",
+    "sections": {
+      "01-intro": "为什么要学编程",
+      "02-setup": "Python 环境搭建",
+      "03-overview": "教材使用指南"
+    }
+  },
+  "unit-1": {
+    "title": "Python 最简生存包",
+    "description": "从零开始，掌握写分析脚本必须的 Python 基础。",
+    "sections": {
+      "01-variables-and-types": "变量与数据类型",
+      "02-lists-and-dicts": "列表与字典",
+      "03-loops": "循环",
+      "04-conditionals": "条件判断",
+      "05-functions": "函数",
+      "06-file-io": "文件读写"
+    }
+  },
+  "unit-2": {
+    "title": "文本处理核心",
+    "description": "用 Python 处理自然语言文本的基本功。",
+    "sections": {
+      "01-string-methods": "字符串方法",
+      "02-regex": "正则表达式",
+      "03-encoding": "编码与中文处理"
+    }
+  },
+  "unit-3": {
+    "title": "语料分析入门",
+    "description": "用 NLTK / spaCy 做分词、词频、搭配分析。",
+    "sections": {
+      "01-tokenization": "分词与词性标注",
+      "02-frequency": "词频统计",
+      "03-collocation": "搭配分析",
+      "04-tfidf": "关键词提取",
+      "05-kwic": "索引行（KWIC）"
+    }
+  },
+  "unit-4": {
+    "title": "数据整理",
+    "description": "用 pandas 把分析结果整理成干净、可分析的数据表。",
+    "sections": {
+      "01-dataframe-basics": "DataFrame 基本操作",
+      "02-groupby": "分组汇总",
+      "03-cleaning": "数据清洗",
+      "04-reshape": "数据变形"
+    }
+  },
+  "unit-5": {
+    "title": "描述统计",
+    "description": "学会用统计量描述你的数据，知道均值、标准差、分布的真正含义。",
+    "sections": {
+      "01-central-tendency": "集中趋势",
+      "02-dispersion": "离散程度",
+      "03-distribution": "分布形态",
+      "04-normalization": "频率标准化",
+      "05-dispersion-metrics": "离散度指标"
+    }
+  },
+  "unit-6": {
+    "title": "数据可视化",
+    "description": "画出来的图比表格更有说服力。",
+    "sections": {
+      "01-basic-charts": "基础图表",
+      "02-distribution-charts": "分布图",
+      "03-relationship-charts": "关系图与效应量"
+    }
+  },
+  "unit-7": {
+    "title": "推断统计基础",
+    "description": "理解 p 值、置信区间、效应量——判断差异是真的还是碰巧。",
+    "sections": {
+      "01-sampling": "抽样分布与标准误",
+      "02-confidence-interval": "置信区间",
+      "03-p-value": "p 值与显著性",
+      "04-effect-size": "效应量",
+      "05-power": "统计检验力"
+    }
+  },
+  "unit-8": {
+    "title": "常用检验方法",
+    "description": "对每种研究问题找到正确的统计检验。",
+    "sections": {
+      "01-t-test": "t 检验与 Mann-Whitney U",
+      "02-chi-square": "卡方检验",
+      "03-anova": "方差分析（ANOVA）",
+      "04-correlation": "相关分析",
+      "05-multiple-correction": "多重比较校正"
+    }
+  },
+  "unit-9": {
+    "title": "回归模型",
+    "description": "同时考虑多个因素对语言现象的影响。",
+    "sections": {
+      "01-linear-regression": "线性回归",
+      "02-logistic-regression": "逻辑回归",
+      "03-interaction": "交互效应",
+      "04-model-diagnostics": "模型诊断",
+      "05-reporting": "结果报告规范"
+    }
+  },
+  "unit-10": {
+    "title": "混合效应模型",
+    "description": "语言学量化研究的标配方法——处理说话人、词项等随机效应。",
+    "sections": {
+      "01-why-mixed": "为什么需要混合模型",
+      "02-fixed-vs-random": "固定效应 vs 随机效应",
+      "03-random-slopes": "随机截距与随机斜率",
+      "04-model-selection": "模型选择",
+      "05-python-implementation": "Python 实现"
+    }
+  },
+  "unit-11": {
+    "title": "研究设计与伦理",
+    "description": "动手前的思维框架——好的研究设计比好的统计方法更重要。",
+    "sections": {
+      "01-operationalization": "研究问题操作化",
+      "02-sampling-strategy": "抽样策略",
+      "03-confounding": "混淆变量与控制",
+      "04-reproducibility": "可重复性"
+    }
+  },
+  "appendix": {
+    "01-python-cheatsheet": "Python 速查表",
+    "02-pandas-cheatsheet": "pandas 速查表",
+    "03-statistics-flowchart": "统计检验选择流程图",
+    "04-common-errors": "常见报错与解决方法",
+    "05-r-vs-python": "R vs Python 对照表",
+    "06-resources": "推荐资源"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "appName": "语言学量化分析",
+  "appSubtitle": "Python 交互式教材",
+  "homeTitle": "语言学量化分析",
+  "homeDescription": "为语言学专业研究生设计的 Python 交互式教材。从零基础到混合效应模型，用可视化、可交互的方式掌握量化研究方法。",
+  "appendix": "附录",
+  "appendixTitle": "附录",
+  "appendixDescription": "速查表、流程图、常见报错解决、R vs Python 对照、推荐资源。",
+  "appendixLabel": "参考工具",
+  "breadcrumbHome": "首页",
+  "prevSection": "← 上一节",
+  "nextSection": "下一节 →",
+  "notFoundTitle": "页面未找到",
+  "notFoundDescription": "你访问的页面不存在，或者链接已失效。",
+  "backHome": "返回首页",
+  "comingSoon": "内容即将更新",
+  "belongsToUnit": "所属单元：",
+  "unitLabel": "第 {{order}} 单元",
+  "prepLabel": "准备",
+  "sectionsCount": "{{count}} 个小节",
+  "language": "语言"
+}

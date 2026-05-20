@@ -1,0 +1,135 @@
+{
+  "unit-0": {
+    "title": "事前準備",
+    "description": "Python 環境をインストールし、本教材の使い方を理解します。",
+    "sections": {
+      "01-intro": "なぜプログラミングを学ぶのか",
+      "02-setup": "Python 環境の構築",
+      "03-overview": "教材の使用ガイド"
+    }
+  },
+  "unit-1": {
+    "title": "Python 最小限サバイバルセット",
+    "description": "ゼロから始めて、分析スクリプトを書くために必要な Python の基礎を習得します。",
+    "sections": {
+      "01-variables-and-types": "変数とデータ型",
+      "02-lists-and-dicts": "リストと辞書",
+      "03-loops": "ループ",
+      "04-conditionals": "条件分岐",
+      "05-functions": "関数",
+      "06-file-io": "ファイル入出力"
+    }
+  },
+  "unit-2": {
+    "title": "テキスト処理の核心",
+    "description": "Python で自然言語テキストを処理するための基本スキル。",
+    "sections": {
+      "01-string-methods": "文字列メソッド",
+      "02-regex": "正規表現",
+      "03-encoding": "エンコーディングと中国語処理"
+    }
+  },
+  "unit-3": {
+    "title": "コーパス分析入門",
+    "description": "NLTK / spaCy を使って形態素解析・語彙頻度・コロケーション分析を行います。",
+    "sections": {
+      "01-tokenization": "形態素解析と品詞タグ付け",
+      "02-frequency": "語彙頻度統計",
+      "03-collocation": "コロケーション分析",
+      "04-tfidf": "キーワード抽出",
+      "05-kwic": "KWIC（コンテクスト付き索引）"
+    }
+  },
+  "unit-4": {
+    "title": "データ整理",
+    "description": "pandas を使って分析結果をクリーンで分析可能なデータテーブルに整理します。",
+    "sections": {
+      "01-dataframe-basics": "DataFrame 基本操作",
+      "02-groupby": "グループ集計",
+      "03-cleaning": "データクリーニング",
+      "04-reshape": "データ変形"
+    }
+  },
+  "unit-5": {
+    "title": "記述統計",
+    "description": "統計量を使ってデータを記述する方法を学び、平均・標準偏差・分布の本当の意味を理解します。",
+    "sections": {
+      "01-central-tendency": "中心傾向",
+      "02-dispersion": "散布度",
+      "03-distribution": "分布の形状",
+      "04-normalization": "頻度の標準化",
+      "05-dispersion-metrics": "分散指標"
+    }
+  },
+  "unit-6": {
+    "title": "データ可視化",
+    "description": "グラフは表よりも説得力があります。",
+    "sections": {
+      "01-basic-charts": "基本グラフ",
+      "02-distribution-charts": "分布図",
+      "03-relationship-charts": "関係図と効果量"
+    }
+  },
+  "unit-7": {
+    "title": "推測統計の基礎",
+    "description": "p 値・信頼区間・効果量を理解し、差が本物か偶然かを判断します。",
+    "sections": {
+      "01-sampling": "標本分布と標準誤差",
+      "02-confidence-interval": "信頼区間",
+      "03-p-value": "p 値と有意性",
+      "04-effect-size": "効果量",
+      "05-power": "統計的検出力"
+    }
+  },
+  "unit-8": {
+    "title": "主な検定手法",
+    "description": "研究課題ごとに適切な統計検定を見つけます。",
+    "sections": {
+      "01-t-test": "t 検定と Mann-Whitney U 検定",
+      "02-chi-square": "カイ二乗検定",
+      "03-anova": "分散分析（ANOVA）",
+      "04-correlation": "相関分析",
+      "05-multiple-correction": "多重比較補正"
+    }
+  },
+  "unit-9": {
+    "title": "回帰モデル",
+    "description": "複数の要因が言語現象に与える影響を同時に考慮します。",
+    "sections": {
+      "01-linear-regression": "線形回帰",
+      "02-logistic-regression": "ロジスティック回帰",
+      "03-interaction": "交互作用",
+      "04-model-diagnostics": "モデル診断",
+      "05-reporting": "結果報告の基準"
+    }
+  },
+  "unit-10": {
+    "title": "混合効果モデル",
+    "description": "言語学の定量研究における標準的手法——話者・語彙項目などのランダム効果を扱います。",
+    "sections": {
+      "01-why-mixed": "なぜ混合モデルが必要か",
+      "02-fixed-vs-random": "固定効果 vs ランダム効果",
+      "03-random-slopes": "ランダム切片とランダム傾き",
+      "04-model-selection": "モデル選択",
+      "05-python-implementation": "Python での実装"
+    }
+  },
+  "unit-11": {
+    "title": "研究デザインと倫理",
+    "description": "実践前の思考フレームワーク——良い研究デザインは良い統計手法よりも重要です。",
+    "sections": {
+      "01-operationalization": "研究課題の操作化",
+      "02-sampling-strategy": "サンプリング戦略",
+      "03-confounding": "交絡変数と制御",
+      "04-reproducibility": "再現可能性"
+    }
+  },
+  "appendix": {
+    "01-python-cheatsheet": "Python チートシート",
+    "02-pandas-cheatsheet": "pandas チートシート",
+    "03-statistics-flowchart": "統計検定選択フローチャート",
+    "04-common-errors": "よくあるエラーと解決方法",
+    "05-r-vs-python": "R vs Python 対照表",
+    "06-resources": "推奨リソース"
+  }
+}

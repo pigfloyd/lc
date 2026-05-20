@@ -1,0 +1,22 @@
+{
+  "appName": "言語学の定量分析",
+  "appSubtitle": "Python インタラクティブ教材",
+  "homeTitle": "言語学の定量分析",
+  "homeDescription": "言語学専攻の大学院生のために設計された Python インタラクティブ教材。ゼロから混合効果モデルまで、可視化とインタラクティブな方法で定量研究手法を習得します。",
+  "appendix": "付録",
+  "appendixTitle": "付録",
+  "appendixDescription": "チートシート、フローチャート、よくあるエラー解決、R vs Python 対照表、推奨リソース。",
+  "appendixLabel": "参考ツール",
+  "breadcrumbHome": "ホーム",
+  "prevSection": "← 前の節",
+  "nextSection": "次の節 →",
+  "notFoundTitle": "ページが見つかりません",
+  "notFoundDescription": "アクセスしたページは存在しないか、リンクが無効です。",
+  "backHome": "ホームに戻る",
+  "comingSoon": "内容は近日公開予定",
+  "belongsToUnit": "所属ユニット：",
+  "unitLabel": "第{{order}}ユニット",
+  "prepLabel": "準備",
+  "sectionsCount": "{{count}}節",
+  "language": "言語"
+}

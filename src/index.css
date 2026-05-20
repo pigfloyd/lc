@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", "Consolas", monospace;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+  font-family: var(--font-sans);
+}
+
+/* Prose-like styling for content areas without the typography plugin */
+.content-prose {
+  @apply leading-relaxed;
+}
+
+.content-prose h1 {
+  @apply text-3xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200;
+}
+
+.content-prose h2 {
+  @apply text-2xl font-semibold text-slate-800 mt-10 mb-4;
+}
+
+.content-prose h3 {
+  @apply text-xl font-semibold text-slate-800 mt-8 mb-3;
+}
+
+.content-prose p {
+  @apply text-base leading-7 text-slate-700 mb-4;
+}
+
+.content-prose ul,
+.content-prose ol {
+  @apply my-4 pl-6 text-slate-700;
+}
+
+.content-prose li {
+  @apply mb-1 leading-7;
+}
+
+.content-prose ul li {
+  @apply list-disc;
+}
+
+.content-prose ol li {
+  @apply list-decimal;
+}
+
+.content-prose code {
+  @apply text-sm bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded font-mono;
+}
+
+.content-prose pre {
+  @apply bg-slate-900 text-slate-100 p-5 rounded-xl overflow-x-auto my-6;
+}
+
+.content-prose pre code {
+  @apply bg-transparent text-inherit p-0 text-sm leading-relaxed;
+}
+
+.content-prose blockquote {
+  @apply border-l-4 border-blue-400 bg-blue-50 px-5 py-3 my-5 rounded-r-lg text-slate-700;
+}
+
+.content-prose table {
+  @apply w-full border-collapse my-6 text-sm;
+}
+
+.content-prose th {
+  @apply bg-slate-100 text-left px-4 py-2 font-semibold border-b-2 border-slate-200;
+}
+
+.content-prose td {
+  @apply px-4 py-2 border-b border-slate-100;
+}
+
+.content-prose a {
+  @apply text-blue-600 underline decoration-blue-300 hover:decoration-blue-600;
+}
+
+.content-prose strong {
+  @apply font-semibold text-slate-900;
+}
+
+/* Sidebar scrollbar */
+.sidebar-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 2px;
+}
+
+.sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

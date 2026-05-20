@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-ChildItem D:\\\\personal\\\\jiaocheng *)",
+      "Bash(Get-ChildItem -Force \"D:\\\\personal\\\\jiaocheng\")",
+      "Bash(Select-Object Name)",
+      "Bash(npm --version)",
+      "Bash(npm list *)",
+      "Bash(npm create *)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(npx vite *)",
+      "Bash(Start-Sleep -Seconds 3)",
+      "Bash(Get-Content \"C:\\\\Users\\\\ourchem\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--personal-jiaocheng\\\\b2469a41-1e3d-4005-91bf-32fdfc32bc3f\\\\tasks\\\\b4x0vy9d6.output\")",
+      "WebFetch(domain:localhost)",
+      "Bash(npm run *)",
+      "Bash(Select-Object -First 30)",
+      "Bash(netstat -ano)",
+      "Bash(findstr :5173)",
+      "PowerShell(Get-Content *)",
+      "Bash(Get-ChildItem -Path \"D:\\\\personal\\\\jiaocheng\" -Depth 0)",
+      "Bash(Select-Object Name, FullName, Mode)"
+    ]
+  }
+}
