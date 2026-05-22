@@ -45,6 +45,27 @@ export default function HomePage() {
           </motion.div>
         ))}
 
+        {/* Navigator entry card */}
+        <motion.div variants={item}>
+          <Link
+            to="/navigator"
+            className="block p-5 rounded-xl bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 hover:border-blue-400 hover:shadow-md transition-all h-full"
+          >
+            <div className="text-xs font-medium text-blue-500 mb-1.5 tracking-wide">
+              {t('researchPath')}
+            </div>
+            <h3 className="text-lg font-semibold text-slate-800 mb-1.5">
+              {t('navigatorHomeEntry')}
+            </h3>
+            <p className="text-sm text-slate-500 leading-relaxed mb-3">
+              {t('navigatorHomeDescription')}
+            </p>
+            <span className="inline-flex items-center px-3 py-1 text-xs font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors">
+              {t('navigatorHomeCta')}
+            </span>
+          </Link>
+        </motion.div>
+
         {/* Appendix card */}
         <motion.div variants={item}>
           <div className="p-5 rounded-xl bg-white border border-slate-200 h-full">

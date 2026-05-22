@@ -2,7 +2,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import CodeBlock from '../../components/shared/CodeBlock';
 import StepThrough from '../../components/shared/StepThrough';
-import TypeBadge from '../../components/shared/TypeBadge';
 
 function ListVisualizer({ items, highlight }: { items: string[]; highlight: number | null }) {
   return (

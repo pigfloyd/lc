@@ -1,5 +1,18 @@
 import { useTranslation } from 'react-i18next';
-import type { UnitMeta, SectionMeta } from '../types/content';
+import type { UnitMeta, SectionMeta, NavMode } from '../types/content';
+import {
+  MANIFEST,
+  buildResearchUnits,
+  buildToolkitUnits,
+  getAdjacentInPath,
+  getPrevInPath,
+} from './contentManifest';
+
+// Cached unit arrays built from manifest (no i18n titles yet)
+const _researchUnits = buildResearchUnits(MANIFEST);
+const _toolkitUnits = buildToolkitUnits(MANIFEST);
+
+// ── Original UNITS (backward compatible) ───────────────────────────
 
 export const UNITS: UnitMeta[] = [
   {
@@ -253,4 +266,67 @@ export function useLocalizedAppendix(): SectionMeta[] {
     ...s,
     title: t(`appendix.${s.id}`, s.title),
   }));
+}
+
+// ── Dual-path hooks ────────────────────────────────────────────────
+
+export function useResearchUnits(): UnitMeta[] {
+  const { t } = useTranslation('units');
+  return _researchUnits.map((unit) => ({
+    ...unit,
+    title: t(`research.${unit.id}.title`, unit.title),
+    description: t(`research.${unit.id}.description`, unit.description),
+    sections: unit.sections.map((s) => {
+      const entry = MANIFEST.find((e) => e.id === s.id);
+      return {
+        ...s,
+        title: entry ? t(entry.titleKey, s.title) : s.title,
+      };
+    }),
+  }));
+}
+
+export function useToolkitUnits(): UnitMeta[] {
+  const { t } = useTranslation('units');
+  return _toolkitUnits.map((unit) => ({
+    ...unit,
+    title: t(`toolkit.${unit.id}.title`, unit.title),
+    description: t(`toolkit.${unit.id}.description`, unit.description),
+    sections: unit.sections.map((s) => {
+      const entry = MANIFEST.find((e) => e.id === s.id);
+      return {
+        ...s,
+        title: entry ? t(entry.titleKey, s.title) : s.title,
+      };
+    }),
+  }));
+}
+
+export function useCurrentUnits(navMode: NavMode): UnitMeta[] {
+  const researchUnits = useResearchUnits();
+  const toolkitUnits = useToolkitUnits();
+  return navMode === 'research' ? researchUnits : toolkitUnits;
+}
+
+export function useCurrentUnit(unitId: string, navMode: NavMode): UnitMeta | undefined {
+  const units = useCurrentUnits(navMode);
+  return units.find((u) => u.id === unitId);
+}
+
+export function getAdjacentSectionForMode(
+  unitId: string,
+  sectionId: string,
+  navMode: NavMode,
+): { unitId: string; sectionId: string } | null {
+  const units = navMode === 'research' ? _researchUnits : _toolkitUnits;
+  return getAdjacentInPath(units, unitId, sectionId);
+}
+
+export function getPrevSectionForMode(
+  unitId: string,
+  sectionId: string,
+  navMode: NavMode,
+): { unitId: string; sectionId: string } | null {
+  const units = navMode === 'research' ? _researchUnits : _toolkitUnits;
+  return getPrevInPath(units, unitId, sectionId);
 }

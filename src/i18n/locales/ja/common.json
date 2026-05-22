@@ -18,5 +18,20 @@
   "unitLabel": "第{{order}}ユニット",
   "prepLabel": "準備",
   "sectionsCount": "{{count}}節",
-  "language": "言語"
+  "language": "言語",
+  "researchPath": "研究パス",
+  "toolkitPath": "ツールボックス",
+  "navigatorTitle": "研究問題ナビゲーター",
+  "navigatorDescription": "以下の研究シナリオを閲覧し、あなたの研究課題に最も適したモジュールを見つけてください。",
+  "navigatorLink": "研究問題ナビ",
+  "navigatorStartModule": "このモジュールへ",
+  "navigatorGoToSection": "学習を始める",
+  "navigatorViewScenarios": "シナリオを見る",
+  "navigatorViewDetails": "スキル要件を見る",
+  "navigatorScenarios": "研究シナリオ",
+  "navigatorSkills": "学べること",
+  "navigatorPrerequisites": "前提条件",
+  "navigatorHomeEntry": "どこから始めればいいか分からない？",
+  "navigatorHomeDescription": "すべての研究シナリオを閲覧し、あなたの課題に最適なモジュールを見つけましょう。",
+  "navigatorHomeCta": "ナビを開く"
 }

@@ -1,16 +1,24 @@
 import { NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 import { useSidebarContext } from '../../context/SidebarContext';
-import { useLocalizedUnits, useLocalizedAppendix } from '../../data/units';
+import { useLocalizedAppendix, useResearchUnits, useToolkitUnits } from '../../data/units';
 import LanguageSwitcher from '../shared/LanguageSwitcher';
 import UnitNavItem from './UnitNavItem';
 import SectionNavItem from './SectionNavItem';
 
+const TAB_RESEARCH = 'research' as const;
+const TAB_TOOLKIT = 'toolkit' as const;
+
 export default function Sidebar() {
   const { t } = useTranslation('common');
-  const { sidebarOpen, closeSidebar, expandUnit } = useSidebarContext();
-  const units = useLocalizedUnits();
+  const { sidebarOpen, closeSidebar, expandUnit, navMode, setNavMode } = useSidebarContext();
+  const researchUnits = useResearchUnits();
+  const toolkitUnits = useToolkitUnits();
   const appendixSections = useLocalizedAppendix();
+
+  const units = navMode === 'research' ? researchUnits : toolkitUnits;
+  const isResearch = navMode === TAB_RESEARCH;
 
   return (
     <aside
@@ -30,8 +38,53 @@ export default function Sidebar() {
         <LanguageSwitcher />
       </div>
 
+      {/* Nav mode toggle */}
+      <div className="shrink-0 px-3 py-2 border-b border-slate-100">
+        <div className="relative flex bg-slate-100 rounded-lg p-0.5">
+          {/* Sliding indicator */}
+          <motion.div
+            layout
+            transition={{ type: 'spring', stiffness: 500, damping: 35 }}
+            className={`absolute top-0.5 bottom-0.5 w-[calc(50%-2px)] rounded-md bg-white shadow-sm
+              ${isResearch ? 'left-0.5' : 'left-[calc(50%+1px)]'}`}
+          />
+          <button
+            onClick={() => setNavMode(TAB_RESEARCH)}
+            className={`relative flex-1 py-1.5 text-xs font-medium rounded-md transition-colors z-10
+              ${isResearch ? 'text-blue-700' : 'text-slate-500 hover:text-slate-700'}`}
+          >
+            {t('researchPath')}
+          </button>
+          <button
+            onClick={() => setNavMode(TAB_TOOLKIT)}
+            className={`relative flex-1 py-1.5 text-xs font-medium rounded-md transition-colors z-10
+              ${!isResearch ? 'text-blue-700' : 'text-slate-500 hover:text-slate-700'}`}
+          >
+            {t('toolkitPath')}
+          </button>
+        </div>
+      </div>
+
       {/* Unit navigation */}
       <nav className="flex-1 overflow-y-auto sidebar-scroll py-3">
+        {/* Navigator link (research mode only) */}
+        {isResearch && (
+          <div className="px-3 mb-2">
+            <NavLink
+              to="/navigator"
+              onClick={closeSidebar}
+              className={({ isActive }) =>
+                `block px-3 py-2 text-sm rounded-lg transition-colors
+                ${isActive
+                  ? 'bg-blue-50 text-blue-700 font-medium'
+                  : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50'}`
+              }
+            >
+              {t('navigatorLink')}
+            </NavLink>
+          </div>
+        )}
+
         {units.map((unit) => (
           <UnitNavItem
             key={unit.id}

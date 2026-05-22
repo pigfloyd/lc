@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { useLocalizedUnits } from '../data/units';
+import { useLocalizedUnits, useCurrentUnit } from '../data/units';
+import { useSidebarContext } from '../context/SidebarContext';
 import Breadcrumb from '../components/navigation/Breadcrumb';
 import SectionCard from '../components/shared/SectionCard';
 import NotFoundPage from './NotFoundPage';
@@ -9,8 +10,15 @@ import NotFoundPage from './NotFoundPage';
 export default function UnitPage() {
   const { unitId } = useParams<{ unitId: string }>();
   const { t } = useTranslation('common');
-  const units = useLocalizedUnits();
-  const unit = units.find((u) => u.id === unitId);
+  const { navMode } = useSidebarContext();
+
+  // Try legacy lookup first, then current-mode lookup
+  const legacyUnits = useLocalizedUnits();
+  let unit = legacyUnits.find((u) => u.id === unitId);
+  const currentUnit = useCurrentUnit(unitId!, navMode);
+  if (!unit && currentUnit) {
+    unit = currentUnit;
+  }
 
   if (!unit) return <NotFoundPage />;
 

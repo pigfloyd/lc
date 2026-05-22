@@ -1,5 +1,4 @@
 import { useLocation } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 import { useSidebarContext } from '../../context/SidebarContext';
 import type { UnitMeta } from '../../types/content';
 import SectionNavItem from './SectionNavItem';
@@ -10,7 +9,6 @@ interface UnitNavItemProps {
 }
 
 export default function UnitNavItem({ unit, onNavigate }: UnitNavItemProps) {
-  const { t } = useTranslation('common');
   const { expandedUnits, toggleUnit } = useSidebarContext();
   const location = useLocation();
   const isExpanded = expandedUnits.has(unit.id);
@@ -30,20 +28,12 @@ export default function UnitNavItem({ unit, onNavigate }: UnitNavItemProps) {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
         <span className="text-sm font-medium truncate">
-          {unit.order === 0
-            ? t('prepLabel')
-            : t('unitLabel', { order: unit.order })}
+          {unit.title}
         </span>
       </button>
 
       {isExpanded && (
         <div className="ml-2">
-          <SectionNavItem
-            to={`/unit/${unit.id}`}
-            label={unit.title}
-            bold
-            onClick={onNavigate}
-          />
           {unit.sections.map((section) => (
             <SectionNavItem
               key={section.id}

@@ -1,5 +1,17 @@
 import { lazy, type ComponentType } from 'react';
 
+// ── Scenario page components ───────────────────────────────────────
+export const scenarioMap: Record<string, ComponentType> = {
+  'foundation-scenario': lazy(() => import('../content/scenarios/FoundationScenario')),
+  'module-1-scenario': lazy(() => import('../content/scenarios/Module1Scenario')),
+  'module-2-scenario': lazy(() => import('../content/scenarios/Module2Scenario')),
+  'module-3-scenario': lazy(() => import('../content/scenarios/Module3Scenario')),
+  'module-4-scenario': lazy(() => import('../content/scenarios/Module4Scenario')),
+  'module-5-scenario': lazy(() => import('../content/scenarios/Module5Scenario')),
+  'module-6-scenario': lazy(() => import('../content/scenarios/Module6Scenario')),
+  'module-7-scenario': lazy(() => import('../content/scenarios/Module7Scenario')),
+};
+
 const sectionMap: Record<string, Record<string, ComponentType>> = {
   'unit-0': {
     '01-intro': lazy(() => import('../content/unit-0/01-intro')),
@@ -80,6 +92,20 @@ const sectionMap: Record<string, Record<string, ComponentType>> = {
   },
 };
 
+// ── Flat manifest-based component lookup ───────────────────────────
+// Maps stable section IDs (from manifest) to components.
+function buildManifestComponentMap(): Record<string, ComponentType> {
+  const map: Record<string, ComponentType> = { ...scenarioMap };
+  for (const unitSections of Object.values(sectionMap)) {
+    for (const [sectionId, component] of Object.entries(unitSections)) {
+      map[sectionId] = component;
+    }
+  }
+  return map;
+}
+
+export const manifestComponentMap: Record<string, ComponentType> = buildManifestComponentMap();
+
 export const appendixMap: Record<string, ComponentType> = {
   '01-python-cheatsheet': lazy(() => import('../content/appendix/01-python-cheatsheet')),
   '02-pandas-cheatsheet': lazy(() => import('../content/appendix/02-pandas-cheatsheet')),
@@ -98,4 +124,9 @@ export function getSectionComponent(
 
 export function getAppendixComponent(appendixId: string): ComponentType | null {
   return appendixMap[appendixId] ?? null;
+}
+
+/** Look up a component by its stable manifest section ID. */
+export function getComponentByManifestId(sectionId: string): ComponentType | null {
+  return manifestComponentMap[sectionId] ?? null;
 }

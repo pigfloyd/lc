@@ -19,3 +19,17 @@ export interface UnitSummary {
   sectionCount: number;
   description: string;
 }
+
+export type NavMode = 'research' | 'toolkit';
+
+export interface SectionManifestEntry {
+  id: string;
+  componentPath: string;
+  titleKey: string;
+  researchModule: string | null;
+  researchOrder: number;
+  toolkitCategory: string;
+  toolkitOrder: number;
+  isScenario?: boolean;
+  hideInToolkit?: boolean;
+}

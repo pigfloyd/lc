@@ -1,12 +1,23 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import type { NavMode } from '../types/content';
+
+function getStoredNavMode(): NavMode {
+  try {
+    const stored = localStorage.getItem('navMode');
+    if (stored === 'research' || stored === 'toolkit') return stored;
+  } catch { /* localStorage unavailable */ }
+  return 'research';
+}
 
 interface SidebarContextType {
   expandedUnits: Set<string>;
   sidebarOpen: boolean;
+  navMode: NavMode;
   toggleUnit: (unitId: string) => void;
   expandUnit: (unitId: string) => void;
   toggleSidebar: () => void;
   closeSidebar: () => void;
+  setNavMode: (mode: NavMode) => void;
 }
 
 const SidebarContext = createContext<SidebarContextType | null>(null);
@@ -14,6 +25,7 @@ const SidebarContext = createContext<SidebarContextType | null>(null);
 export function SidebarProvider({ children }: { children: ReactNode }) {
   const [expandedUnits, setExpandedUnits] = useState<Set<string>>(new Set());
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [navMode, setNavModeState] = useState<NavMode>(getStoredNavMode);
 
   const toggleUnit = useCallback((unitId: string) => {
     setExpandedUnits((prev) => {
@@ -44,9 +56,15 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
     setSidebarOpen(false);
   }, []);
 
+  const setNavMode = useCallback((mode: NavMode) => {
+    setNavModeState(mode);
+    try { localStorage.setItem('navMode', mode); } catch { /* ignore */ }
+    setExpandedUnits(new Set());
+  }, []);
+
   return (
     <SidebarContext.Provider
-      value={{ expandedUnits, sidebarOpen, toggleUnit, expandUnit, toggleSidebar, closeSidebar }}
+      value={{ expandedUnits, sidebarOpen, navMode, toggleUnit, expandUnit, toggleSidebar, closeSidebar, setNavMode }}
     >
       {children}
     </SidebarContext.Provider>

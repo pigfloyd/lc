@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useLocalizedUnits } from '../../data/units';
+import { useLocalizedUnits, useCurrentUnit } from '../../data/units';
+import { useSidebarContext } from '../../context/SidebarContext';
 
 interface BreadcrumbProps {
   unitId: string;
@@ -10,7 +11,9 @@ interface BreadcrumbProps {
 
 export default function Breadcrumb({ unitId, sectionId, appendix }: BreadcrumbProps) {
   const { t } = useTranslation('common');
-  const units = useLocalizedUnits();
+  const { navMode } = useSidebarContext();
+  const legacyUnits = useLocalizedUnits();
+  const currentUnit = useCurrentUnit(unitId, navMode);
 
   if (appendix) {
     return (
@@ -24,7 +27,11 @@ export default function Breadcrumb({ unitId, sectionId, appendix }: BreadcrumbPr
     );
   }
 
-  const unit = units.find((u) => u.id === unitId);
+  // Try legacy first, then current mode
+  let unit = legacyUnits.find((u) => u.id === unitId);
+  if (!unit && currentUnit) {
+    unit = currentUnit;
+  }
   if (!unit) return null;
 
   const section = sectionId
@@ -38,9 +45,7 @@ export default function Breadcrumb({ unitId, sectionId, appendix }: BreadcrumbPr
       </Link>
       <span>/</span>
       {section ? (
-        <Link to={`/unit/${unitId}`} className="hover:text-slate-600 transition-colors">
-          {unit.title}
-        </Link>
+        <span className="text-slate-600">{unit.title}</span>
       ) : (
         <span className="text-slate-600">{unit.title}</span>
       )}

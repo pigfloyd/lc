@@ -18,5 +18,20 @@
   "unitLabel": "第 {{order}} 单元",
   "prepLabel": "准备",
   "sectionsCount": "{{count}} 个小节",
-  "language": "语言"
+  "language": "语言",
+  "researchPath": "研究路径",
+  "toolkitPath": "工具箱",
+  "navigatorTitle": "研究问题导航",
+  "navigatorDescription": "浏览下面的研究场景，找到与你的研究问题最匹配的模块。",
+  "navigatorLink": "研究问题导航",
+  "navigatorStartModule": "进入此模块",
+  "navigatorGoToSection": "去学习",
+  "navigatorViewScenarios": "查看研究场景",
+  "navigatorViewDetails": "查看技能要求",
+  "navigatorScenarios": "研究场景",
+  "navigatorSkills": "你将能够回答",
+  "navigatorPrerequisites": "前置要求",
+  "navigatorHomeEntry": "不确定从哪里开始？",
+  "navigatorHomeDescription": "浏览所有研究场景，找到最适合你问题的模块。",
+  "navigatorHomeCta": "打开研究导航"
 }

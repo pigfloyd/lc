@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getPrevSection, getAdjacentSection, useLocalizedUnits } from '../../data/units';
+import { getPrevSection, getAdjacentSection, getPrevSectionForMode, getAdjacentSectionForMode, useLocalizedUnits, useCurrentUnits } from '../../data/units';
+import { useSidebarContext } from '../../context/SidebarContext';
 
 interface SectionFooterProps {
   unitId: string;
@@ -9,10 +10,17 @@ interface SectionFooterProps {
 
 export default function SectionFooter({ unitId, sectionId }: SectionFooterProps) {
   const { t } = useTranslation('common');
-  const units = useLocalizedUnits();
+  const { navMode } = useSidebarContext();
+  const legacyUnits = useLocalizedUnits();
+  const currentUnits = useCurrentUnits(navMode);
 
-  const prev = getPrevSection(unitId, sectionId);
-  const next = getAdjacentSection(unitId, sectionId);
+  // Use mode-aware navigation if not a legacy path
+  const isLegacy = /^unit-\d+$/.test(unitId);
+  const prev = isLegacy ? getPrevSection(unitId, sectionId) : getPrevSectionForMode(unitId, sectionId, navMode);
+  const next = isLegacy ? getAdjacentSection(unitId, sectionId) : getAdjacentSectionForMode(unitId, sectionId, navMode);
+
+  // Look up titles in the correct unit list
+  const units = isLegacy ? legacyUnits : currentUnits;
 
   const prevTitle = prev
     ? units.find((u) => u.id === prev.unitId)?.sections.find((s) => s.id === prev.sectionId)?.title

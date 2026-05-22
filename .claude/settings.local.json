@@ -19,7 +19,22 @@
       "Bash(findstr :5173)",
       "PowerShell(Get-Content *)",
       "Bash(Get-ChildItem -Path \"D:\\\\personal\\\\jiaocheng\" -Depth 0)",
-      "Bash(Select-Object Name, FullName, Mode)"
+      "Bash(Select-Object Name, FullName, Mode)",
+      "PowerShell(New-Item *)",
+      "Bash(Get-ChildItem *)"
+    ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell -Command \"Invoke-RestMethod -Uri 'https://api.day.app/bUzQiB85kPwwPeWjzvDWRo/Claude Code/任务已完成' -Method Get | Out-Null\""
+          }
+        ]
+      }
     ]
   }
 }

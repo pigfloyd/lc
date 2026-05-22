@@ -131,5 +131,95 @@
     "04-common-errors": "常见报错与解决方法",
     "05-r-vs-python": "R vs Python 对照表",
     "06-resources": "推荐资源"
+  },
+  "research": {
+    "foundation": {
+      "title": "基础包",
+      "description": "拿到数据，我需要会什么？——Python 基本词汇、读取数据、筛选分组汇总。"
+    },
+    "module-1": {
+      "title": "描述与探索",
+      "description": "我的数据长什么样？——从均值、分布到可视化，了解数据的基本面貌。"
+    },
+    "module-2": {
+      "title": "组间比较",
+      "description": "A 组和 B 组有区别吗？——t 检验、ANOVA、卡方检验，语言学最高频的研究问题。"
+    },
+    "module-3": {
+      "title": "关联与共现",
+      "description": "词和词之间有什么关系？——搭配分析、KWIC、关键词提取、统计相关。"
+    },
+    "module-4": {
+      "title": "趋势与变化",
+      "description": "特征 X 在怎么变？——线性回归、多元回归、交互效应、模型诊断。"
+    },
+    "module-5": {
+      "title": "选择与决策",
+      "description": "为什么选 A 不选 B？——逻辑回归、分类变量编码、模型诊断与结果报告。"
+    },
+    "module-6": {
+      "title": "变异与层次",
+      "description": "个体差异怎么处理？——混合效应模型，语言学量化研究的标配方法。"
+    },
+    "module-7": {
+      "title": "从问题到方案",
+      "description": "怎么设计我的分析？——操作化、抽样、混淆变量、可重复性。"
+    }
+  },
+  "toolkit": {
+    "python": {
+      "title": "Python 基础",
+      "description": "从零开始，掌握写分析脚本必须的 Python 基础。"
+    },
+    "text": {
+      "title": "文本处理",
+      "description": "用 Python 处理自然语言文本的基本功。"
+    },
+    "corpus": {
+      "title": "语料分析工具",
+      "description": "用 NLTK / spaCy 做分词、词频、搭配分析。"
+    },
+    "data": {
+      "title": "数据整理",
+      "description": "用 pandas 把分析结果整理成干净、可分析的数据表。"
+    },
+    "descriptive": {
+      "title": "描述统计",
+      "description": "学会用统计量描述你的数据，知道均值、标准差、分布的真正含义。"
+    },
+    "visualization": {
+      "title": "数据可视化",
+      "description": "画出来的图比表格更有说服力。"
+    },
+    "inference": {
+      "title": "推断统计概念",
+      "description": "理解 p 值、置信区间、效应量——判断差异是真的还是碰巧。"
+    },
+    "tests": {
+      "title": "常用检验方法",
+      "description": "对每种研究问题找到正确的统计检验。"
+    },
+    "regression": {
+      "title": "回归模型",
+      "description": "同时考虑多个因素对语言现象的影响。"
+    },
+    "mixed": {
+      "title": "混合效应模型",
+      "description": "语言学量化研究的标配方法——处理说话人、词项等随机效应。"
+    },
+    "design": {
+      "title": "研究设计与伦理",
+      "description": "动手前的思维框架——好的研究设计比好的统计方法更重要。"
+    }
+  },
+  "scenario": {
+    "foundation": "你要解决什么问题？",
+    "module-1": "你的研究问题是哪种？",
+    "module-2": "你的比较属于哪一种？",
+    "module-3": "你要发现什么样的词语关系？",
+    "module-4": "你要追踪什么趋势？",
+    "module-5": "你的二元选择问题是？",
+    "module-6": "你的数据有嵌套结构吗？",
+    "module-7": "怎么把模糊的研究兴趣变成清晰的方案？"
   }
 }
