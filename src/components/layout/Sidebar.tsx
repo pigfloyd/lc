@@ -67,23 +67,24 @@ export default function Sidebar() {
 
       {/* Unit navigation */}
       <nav className="flex-1 overflow-y-auto sidebar-scroll py-3">
-        {/* Navigator link (research mode only) */}
-        {isResearch && (
-          <div className="px-3 mb-2">
-            <NavLink
-              to="/navigator"
-              onClick={closeSidebar}
-              className={({ isActive }) =>
-                `block px-3 py-2 text-sm rounded-lg transition-colors
-                ${isActive
-                  ? 'bg-blue-50 text-blue-700 font-medium'
-                  : 'text-slate-500 hover:text-slate-800 hover:bg-slate-50'}`
-              }
-            >
-              {t('navigatorLink')}
-            </NavLink>
-          </div>
-        )}
+        {/* Navigator link — always visible, prominently styled */}
+        <div className="px-3 mb-3">
+          <NavLink
+            to="/navigator"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-lg transition-all
+              ${isActive
+                ? 'bg-blue-500 text-white shadow-sm'
+                : 'bg-blue-50 text-blue-700 hover:bg-blue-100'}`
+            }
+          >
+            <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            {t('navigatorLink')}
+          </NavLink>
+        </div>
 
         {units.map((unit) => (
           <UnitNavItem

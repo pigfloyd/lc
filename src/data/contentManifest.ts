@@ -27,18 +27,6 @@ export const TOOLKIT_CATEGORIES: { id: string; titleKey: string; descKey: string
   { id: 'design',        titleKey: 'toolkit.design.title',        descKey: 'toolkit.design.description',        order: 10 },
 ];
 
-// ── Scenario page entries (research-only, not in toolkit) ─────────
-const SCENARIOS: SectionManifestEntry[] = [
-  { id: 'foundation-scenario', componentPath: '../content/scenarios/FoundationScenario', titleKey: 'scenario.foundation', researchModule: 'foundation', researchOrder: 0, toolkitCategory: '', toolkitOrder: -1, isScenario: true, hideInToolkit: true },
-  { id: 'module-1-scenario',   componentPath: '../content/scenarios/Module1Scenario',   titleKey: 'scenario.module-1',   researchModule: 'module-1',   researchOrder: 0, toolkitCategory: '', toolkitOrder: -1, isScenario: true, hideInToolkit: true },
-  { id: 'module-2-scenario',   componentPath: '../content/scenarios/Module2Scenario',   titleKey: 'scenario.module-2',   researchModule: 'module-2',   researchOrder: 0, toolkitCategory: '', toolkitOrder: -1, isScenario: true, hideInToolkit: true },
-  { id: 'module-3-scenario',   componentPath: '../content/scenarios/Module3Scenario',   titleKey: 'scenario.module-3',   researchModule: 'module-3',   researchOrder: 0, toolkitCategory: '', toolkitOrder: -1, isScenario: true, hideInToolkit: true },
-  { id: 'module-4-scenario',   componentPath: '../content/scenarios/Module4Scenario',   titleKey: 'scenario.module-4',   researchModule: 'module-4',   researchOrder: 0, toolkitCategory: '', toolkitOrder: -1, isScenario: true, hideInToolkit: true },
-  { id: 'module-5-scenario',   componentPath: '../content/scenarios/Module5Scenario',   titleKey: 'scenario.module-5',   researchModule: 'module-5',   researchOrder: 0, toolkitCategory: '', toolkitOrder: -1, isScenario: true, hideInToolkit: true },
-  { id: 'module-6-scenario',   componentPath: '../content/scenarios/Module6Scenario',   titleKey: 'scenario.module-6',   researchModule: 'module-6',   researchOrder: 0, toolkitCategory: '', toolkitOrder: -1, isScenario: true, hideInToolkit: true },
-  { id: 'module-7-scenario',   componentPath: '../content/scenarios/Module7Scenario',   titleKey: 'scenario.module-7',   researchModule: 'module-7',   researchOrder: 0, toolkitCategory: '', toolkitOrder: -1, isScenario: true, hideInToolkit: true },
-];
-
 // ── Content section entries ───────────────────────────────────────
 // Each entry maps one source file into both research and toolkit paths.
 // researchModule = null means "toolkit only" (not in research path).
@@ -429,7 +417,7 @@ const CONTENT_SECTIONS: SectionManifestEntry[] = [
   },
 ];
 
-export const MANIFEST: SectionManifestEntry[] = [...SCENARIOS, ...CONTENT_SECTIONS];
+export const MANIFEST: SectionManifestEntry[] = [...CONTENT_SECTIONS];
 
 // ── Builders ──────────────────────────────────────────────────────
 

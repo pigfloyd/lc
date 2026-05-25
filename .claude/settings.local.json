@@ -21,7 +21,12 @@
       "Bash(Get-ChildItem -Path \"D:\\\\personal\\\\jiaocheng\" -Depth 0)",
       "Bash(Select-Object Name, FullName, Mode)",
       "PowerShell(New-Item *)",
-      "Bash(Get-ChildItem *)"
+      "Bash(Get-ChildItem *)",
+      "Bash(git *)",
+      "Bash(Remove-Item \"D:\\\\personal\\\\jiaocheng\\\\src\\\\content\\\\scenarios\\\\*.tsx\" -Force)",
+      "Bash(Write-Output \"Deleted scenario files\")",
+      "Bash(node *)",
+      "PowerShell(npx tsc --noEmit --pretty 2>&1 | Select-Object -First 30)"
     ]
   },
   "hooks": {
