@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { useLocalizedUnits, useLocalizedAppendix } from '../data/units';
+import { useCurrentUnits, useLocalizedAppendix } from '../data/units';
+import { useSidebarContext } from '../context/SidebarContext';
 import UnitCard from '../components/shared/UnitCard';
 
 const container = {
@@ -19,7 +20,8 @@ const item = {
 
 export default function HomePage() {
   const { t } = useTranslation('common');
-  const units = useLocalizedUnits();
+  const { navMode } = useSidebarContext();
+  const units = useCurrentUnits(navMode);
   const appendixSections = useLocalizedAppendix();
 
   return (
@@ -31,6 +33,9 @@ export default function HomePage() {
         <p className="text-lg text-slate-500 leading-relaxed max-w-xl">
           {t('homeDescription')}
         </p>
+        <div className="mt-4 inline-flex items-center rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700">
+          {navMode === 'research' ? t('researchPath') : t('toolkitPath')}
+        </div>
       </div>
 
       <motion.div

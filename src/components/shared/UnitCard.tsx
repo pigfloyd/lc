@@ -11,7 +11,7 @@ export default function UnitCard({ unit }: UnitCardProps) {
 
   return (
     <Link
-      to={`/unit/${unit.id}/${unit.sections[0]?.id}`}
+      to={`/unit/${unit.id}`}
       className="block p-5 rounded-xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md transition-all duration-200 group"
     >
       <h3 className="text-lg font-semibold text-slate-800 group-hover:text-blue-700 transition-colors mb-1.5">

@@ -20,18 +20,18 @@ export default function AppendixPage() {
   const location = useLocation();
   const appendixSections = useLocalizedAppendix();
 
+  // Scroll to top on navigation
+  useEffect(() => {
+    const main = document.querySelector('main');
+    if (main) main.scrollTop = 0;
+  }, [location.pathname]);
+
   if (!appendixId) return <NotFoundPage />;
 
   const Component = getAppendixComponent(appendixId);
   const section = appendixSections.find((s) => s.id === appendixId);
 
   if (!Component || !section) return <NotFoundPage />;
-
-  // Scroll to top on navigation
-  useEffect(() => {
-    const main = document.querySelector('main');
-    if (main) main.scrollTop = 0;
-  }, [location.pathname]);
 
   return (
     <div>

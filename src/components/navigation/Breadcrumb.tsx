@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useLocalizedUnits, useCurrentUnit } from '../../data/units';
+import { useAnyUnit } from '../../data/units';
 import { useSidebarContext } from '../../context/SidebarContext';
 
 interface BreadcrumbProps {
@@ -12,8 +12,7 @@ interface BreadcrumbProps {
 export default function Breadcrumb({ unitId, sectionId, appendix }: BreadcrumbProps) {
   const { t } = useTranslation('common');
   const { navMode } = useSidebarContext();
-  const legacyUnits = useLocalizedUnits();
-  const currentUnit = useCurrentUnit(unitId, navMode);
+  const unit = useAnyUnit(unitId, navMode);
 
   if (appendix) {
     return (
@@ -27,11 +26,6 @@ export default function Breadcrumb({ unitId, sectionId, appendix }: BreadcrumbPr
     );
   }
 
-  // Try legacy first, then current mode
-  let unit = legacyUnits.find((u) => u.id === unitId);
-  if (!unit && currentUnit) {
-    unit = currentUnit;
-  }
   if (!unit) return null;
 
   const section = sectionId

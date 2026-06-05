@@ -659,6 +659,7 @@ export function buildResearchUnits(manifest: SectionManifestEntry[]): UnitMeta[]
 
     const indexed = unique.map((entry, i) => ({ entry, i }));
     indexed.sort((a, b) => a.entry.researchOrder - b.entry.researchOrder || a.i - b.i);
+    if (unique.length === 0) continue;
     units.push({
       id: config.id,
       title: '', // filled by i18n

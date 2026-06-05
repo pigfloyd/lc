@@ -1,7 +1,7 @@
 import { Suspense, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { resolveSectionComponent } from '../data/registry';
-import { getSectionMeta, getUnitById, useCurrentUnit } from '../data/units';
+import { getSectionMeta, useAnyUnit } from '../data/units';
 import { getSectionById } from '../data/contentManifest';
 import { useSidebarContext } from '../context/SidebarContext';
 import Breadcrumb from '../components/navigation/Breadcrumb';
@@ -38,7 +38,7 @@ export default function SectionPage() {
   const { expandUnit, navMode } = useSidebarContext();
 
   // ── All hooks must be called before any early return ──────────────
-  const currentUnit = useCurrentUnit(unitId ?? '', navMode);
+  const unit = useAnyUnit(unitId ?? '', navMode);
 
   // Auto-expand parent unit in sidebar
   useEffect(() => {
@@ -59,19 +59,13 @@ export default function SectionPage() {
   // ── Early returns after all hooks ────────────────────────────────
   if (!unitId || !sectionId) return <NotFoundPage />;
 
-  let Component = resolveSectionComponent(unitId, sectionId);
-  let section = getSectionMeta(unitId, sectionId);
+  const Component = resolveSectionComponent(unitId, sectionId);
+  let section = unit?.sections.find((s) => s.id === sectionId) ?? getSectionMeta(unitId, sectionId);
 
   // Manifest fallback: section may only exist in the manifest (not in legacy UNITS)
   if (!section) {
     const entry = getSectionById(sectionId);
     if (entry) section = { id: entry.id, title: '', order: 0 };
-  }
-
-  // Nav-mode-aware fallback for unit/section metadata
-  let unit = currentUnit ?? getUnitById(unitId);
-  if (currentUnit && !section) {
-    section = currentUnit.sections.find((s) => s.id === sectionId);
   }
 
   if (!Component || !section || !unit) return <NotFoundPage />;
