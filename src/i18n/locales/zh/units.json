@@ -17,7 +17,18 @@
       "03-loops": "循环",
       "04-conditionals": "条件判断",
       "05-functions": "函数",
-      "06-file-io": "文件读写"
+      "06-file-io": "文件读写",
+      "07-numpy-basics": "NumPy 数值计算"
+    }
+  },
+  "data-collection": {
+    "title": "数据收集与导入",
+    "description": "从文件、API 和网页获取语言学研究数据。",
+    "sections": {
+      "01-file-formats": "语言学数据格式",
+      "02-api-access": "通过 API 获取语料",
+      "03-web-scraping": "网页文本采集",
+      "04-data-integration": "多源数据整合"
     }
   },
   "unit-2": {
@@ -36,8 +47,14 @@
       "01-tokenization": "分词与词性标注",
       "02-frequency": "词频统计",
       "03-collocation": "搭配分析",
-      "04-tfidf": "关键词提取",
-      "05-kwic": "索引行（KWIC）"
+      "04-collostruction": "构式词汇关联",
+      "05-tfidf": "关键词提取",
+      "06-kwic": "索引行（KWIC）",
+      "07-text-classification": "文本分类",
+      "08-sentiment-analysis": "情感与态度分析",
+      "09-word-embeddings": "词向量入门",
+      "10-clustering": "文本聚类",
+      "11-dimensionality-reduction": "降维与可视化"
     }
   },
   "unit-4": {
@@ -47,7 +64,9 @@
       "01-dataframe-basics": "DataFrame 基本操作",
       "02-groupby": "分组汇总",
       "03-cleaning": "数据清洗",
-      "04-reshape": "数据变形"
+      "04-reshape": "数据变形",
+      "05-missing-data": "缺失数据处理",
+      "06-outliers": "异常值检测与处理"
     }
   },
   "unit-5": {
@@ -58,7 +77,7 @@
       "02-dispersion": "离散程度",
       "03-distribution": "分布形态",
       "04-normalization": "频率标准化",
-      "05-dispersion-metrics": "离散度指标"
+      "05-lexical-diversity": "词汇丰富度"
     }
   },
   "unit-6": {
@@ -89,7 +108,8 @@
       "02-chi-square": "卡方检验",
       "03-anova": "方差分析（ANOVA）",
       "04-correlation": "相关分析",
-      "05-multiple-correction": "多重比较校正"
+      "05-multiple-correction": "多重比较校正",
+      "06-paired-test": "配对检验与重复测量"
     }
   },
   "unit-9": {
@@ -100,7 +120,8 @@
       "02-logistic-regression": "逻辑回归",
       "03-interaction": "交互效应",
       "04-model-diagnostics": "模型诊断",
-      "05-reporting": "结果报告规范"
+      "05-reporting": "结果报告规范",
+      "06-categorical-encoding": "分类变量编码"
     }
   },
   "unit-10": {
@@ -111,7 +132,8 @@
       "02-fixed-vs-random": "固定效应 vs 随机效应",
       "03-random-slopes": "随机截距与随机斜率",
       "04-model-selection": "模型选择",
-      "05-python-implementation": "Python 实现"
+      "05-python-implementation": "Python 实现",
+      "06-glmm": "广义线性混合模型"
     }
   },
   "unit-11": {
@@ -121,7 +143,23 @@
       "01-operationalization": "研究问题操作化",
       "02-sampling-strategy": "抽样策略",
       "03-confounding": "混淆变量与控制",
-      "04-reproducibility": "可重复性"
+      "04-reproducibility": "可重复性",
+      "05-ethics-review": "伦理审查与数据伦理",
+      "06-within-between": "被试内 vs 被试间设计",
+      "07-counterbalancing": "拉丁方与平衡设计",
+      "08-questionnaire-design": "问卷设计基础",
+      "09-likert-scales": "Likert 量表与措辞偏差"
+    }
+  },
+  "unit-12": {
+    "title": "信度与测量",
+    "description": "标注语料、评分实验的命门——κ、α、效度，让你的测量站得住脚。",
+    "sections": {
+      "01-inter-rater-kappa": "评分者间一致性（Cohen κ）",
+      "02-krippendorff-alpha": "Krippendorff α（多评分者）",
+      "03-cronbach-alpha": "Cronbach α（内部一致性）",
+      "04-validity": "效度：构念、内容、效标",
+      "05-measurement-levels": "测量层级：名义、定序、定距、定比"
     }
   },
   "appendix": {
@@ -130,46 +168,72 @@
     "03-statistics-flowchart": "统计检验选择流程图",
     "04-common-errors": "常见报错与解决方法",
     "05-r-vs-python": "R vs Python 对照表",
-    "06-resources": "推荐资源"
+    "06-resources": "推荐资源",
+    "07-sklearn-cheatsheet": "sklearn 速查表",
+    "08-linguistics-datasets": "语言学数据集索引"
   },
   "research": {
     "foundation": {
       "title": "基础包",
       "description": "拿到数据，我需要会什么？——Python 基本词汇、读取数据、筛选分组汇总。"
     },
-    "module-1": {
+    "data-acquisition": {
+      "title": "数据获取",
+      "description": "从文件、API 和网页获取语言学研究数据。"
+    },
+    "design-thinking": {
+      "title": "研究设计思维",
+      "description": "动手分析前的设计基本功——操作化、混淆控制、被试内/间设计、拉丁方、问卷与 Likert 量表。"
+    },
+    "reliability": {
+      "title": "信度与测量",
+      "description": "标注语料、评分实验的命门——κ、α、效度概念，让你的测量站得住脚。"
+    },
+    "exploration": {
       "title": "描述与探索",
       "description": "我的数据长什么样？——从均值、分布到可视化，了解数据的基本面貌。"
     },
-    "module-2": {
-      "title": "组间比较",
-      "description": "A 组和 B 组有区别吗？——t 检验、ANOVA、卡方检验，语言学最高频的研究问题。"
-    },
-    "module-3": {
+    "association": {
       "title": "关联与共现",
       "description": "词和词之间有什么关系？——搭配分析、KWIC、关键词提取、统计相关。"
     },
-    "module-4": {
+    "pattern-discovery": {
+      "title": "模式发现",
+      "description": "数据里藏着哪些类别？——文本分类、情感分析、词向量、聚类与降维。"
+    },
+    "inference-basics": {
+      "title": "推断的本质",
+      "description": "从样本到总体的逻辑——抽样分布、p 值、置信区间、效应量、抽样策略、检验力。"
+    },
+    "comparison": {
+      "title": "组间比较",
+      "description": "A 组和 B 组有区别吗？——t 检验、配对检验、ANOVA、卡方、多重比较校正。"
+    },
+    "trends": {
       "title": "趋势与变化",
       "description": "特征 X 在怎么变？——线性回归、多元回归、交互效应、模型诊断。"
     },
-    "module-5": {
+    "decision": {
       "title": "选择与决策",
       "description": "为什么选 A 不选 B？——逻辑回归、分类变量编码、模型诊断与结果报告。"
     },
-    "module-6": {
+    "hierarchy": {
       "title": "变异与层次",
       "description": "个体差异怎么处理？——混合效应模型，语言学量化研究的标配方法。"
     },
-    "module-7": {
-      "title": "从问题到方案",
-      "description": "怎么设计我的分析？——操作化、抽样、混淆变量、可重复性。"
+    "reproducibility": {
+      "title": "可重复性",
+      "description": "把研究流程钉住——代码、数据、报告，让他人能复现你的结果。"
     }
   },
   "toolkit": {
     "python": {
       "title": "Python 基础",
       "description": "从零开始，掌握写分析脚本必须的 Python 基础。"
+    },
+    "data-collection": {
+      "title": "数据收集与导入",
+      "description": "从文件、API 和网页获取语言学研究数据。"
     },
     "text": {
       "title": "文本处理",
@@ -208,8 +272,16 @@
       "description": "语言学量化研究的标配方法——处理说话人、词项等随机效应。"
     },
     "design": {
-      "title": "研究设计与伦理",
-      "description": "动手前的思维框架——好的研究设计比好的统计方法更重要。"
+      "title": "研究设计",
+      "description": "操作化研究问题、抽样策略、混淆控制、实验设计、问卷设计——动手前的设计框架。"
+    },
+    "reliability": {
+      "title": "信度与测量",
+      "description": "Cohen κ / Krippendorff α / Cronbach α / 效度 / 测量层级——衡量你的测量是否站得住。"
+    },
+    "ethics": {
+      "title": "可重复性与伦理",
+      "description": "确保研究可重复、通过伦理审查——负责任的研究实践。"
     }
   }
 }

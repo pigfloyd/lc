@@ -26,7 +26,9 @@
       "Bash(Remove-Item \"D:\\\\personal\\\\jiaocheng\\\\src\\\\content\\\\scenarios\\\\*.tsx\" -Force)",
       "Bash(Write-Output \"Deleted scenario files\")",
       "Bash(node *)",
-      "PowerShell(npx tsc --noEmit --pretty 2>&1 | Select-Object -First 30)"
+      "PowerShell(npx tsc --noEmit --pretty 2>&1 | Select-Object -First 30)",
+      "PowerShell(npm run *)",
+      "PowerShell(Write-Error *)"
     ]
   },
   "hooks": {

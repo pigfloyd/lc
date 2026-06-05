@@ -24,13 +24,7 @@
   "navigatorTitle": "研究問題ナビゲーター",
   "navigatorDescription": "いくつかの簡単な質問に答えて、あなたに必要な学習ポイントを見つけましょう。",
   "navigatorLink": "研究問題ナビ",
-  "navigatorStartModule": "このモジュールへ",
   "navigatorGoToSection": "学習を始める",
-  "navigatorViewScenarios": "シナリオを見る",
-  "navigatorViewDetails": "スキル要件を見る",
-  "navigatorScenarios": "研究シナリオ",
-  "navigatorSkills": "学べること",
-  "navigatorPrerequisites": "前提条件",
   "navigatorHomeEntry": "どこから始めればいいか分からない？",
   "navigatorHomeDescription": "すべての研究シナリオを閲覧し、あなたの課題に最適なモジュールを見つけましょう。",
   "navigatorHomeCta": "ナビを開く"

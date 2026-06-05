@@ -35,24 +35,34 @@ const slideIn = {
 
 const COLORS: Record<string, string> = {
   foundation: 'border-emerald-300 bg-emerald-50',
-  'module-1': 'border-purple-300 bg-purple-50',
-  'module-2': 'border-orange-300 bg-orange-50',
-  'module-3': 'border-sky-300 bg-sky-50',
-  'module-4': 'border-rose-300 bg-rose-50',
-  'module-5': 'border-amber-300 bg-amber-50',
-  'module-6': 'border-teal-300 bg-teal-50',
-  'module-7': 'border-indigo-300 bg-indigo-50',
+  'data-acquisition': 'border-violet-300 bg-violet-50',
+  'design-thinking': 'border-indigo-300 bg-indigo-50',
+  reliability: 'border-lime-300 bg-lime-50',
+  exploration: 'border-purple-300 bg-purple-50',
+  association: 'border-sky-300 bg-sky-50',
+  'pattern-discovery': 'border-cyan-300 bg-cyan-50',
+  'inference-basics': 'border-orange-300 bg-orange-50',
+  comparison: 'border-fuchsia-300 bg-fuchsia-50',
+  trends: 'border-rose-300 bg-rose-50',
+  decision: 'border-amber-300 bg-amber-50',
+  hierarchy: 'border-teal-300 bg-teal-50',
+  reproducibility: 'border-slate-300 bg-slate-50',
 };
 
 const DOT_COLORS: Record<string, string> = {
   foundation: 'bg-emerald-500',
-  'module-1': 'bg-purple-500',
-  'module-2': 'bg-orange-500',
-  'module-3': 'bg-sky-500',
-  'module-4': 'bg-rose-500',
-  'module-5': 'bg-amber-500',
-  'module-6': 'bg-teal-500',
-  'module-7': 'bg-indigo-500',
+  'data-acquisition': 'bg-violet-500',
+  'design-thinking': 'bg-indigo-500',
+  reliability: 'bg-lime-500',
+  exploration: 'bg-purple-500',
+  association: 'bg-sky-500',
+  'pattern-discovery': 'bg-cyan-500',
+  'inference-basics': 'bg-orange-500',
+  comparison: 'bg-fuchsia-500',
+  trends: 'bg-rose-500',
+  decision: 'bg-amber-500',
+  hierarchy: 'bg-teal-500',
+  reproducibility: 'bg-slate-500',
 };
 
 function ProgressBar({ current, total }: { current: number; total: number }) {
@@ -182,17 +192,37 @@ function QuizView({
   );
 }
 
+const VISITED_KEY = 'navigator-visited-sections';
+
+function getVisitedSections(): Set<string> {
+  try {
+    const raw = localStorage.getItem(VISITED_KEY);
+    return raw ? new Set(JSON.parse(raw)) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
 function ResultModuleCard({ mod }: { mod: RecommendedModule }) {
   const { t } = useTranslation('units');
   const { t: tc } = useTranslation('common');
   const colors = COLORS[mod.moduleId] ?? 'border-slate-200 bg-slate-50';
   const dotColor = DOT_COLORS[mod.moduleId] ?? 'bg-slate-400';
+  const visited = getVisitedSections();
+  const visitedCount = mod.sections.filter((s) => visited.has(s.sectionId)).length;
 
   return (
     <div className={`rounded-xl border-2 ${colors} p-5`}>
-      <h3 className="text-base font-semibold text-slate-800 mb-1">
-        {t(mod.moduleTitleKey)}
-      </h3>
+      <div className="flex items-center gap-2 mb-1">
+        <h3 className="text-base font-semibold text-slate-800">
+          {t(mod.moduleTitleKey)}
+        </h3>
+        {visitedCount > 0 && (
+          <span className="text-xs font-medium text-emerald-600 bg-emerald-100 px-1.5 py-0.5 rounded">
+            {visitedCount}/{mod.sections.length}
+          </span>
+        )}
+      </div>
       {mod.reasons.length > 0 && (
         <p className="text-xs text-slate-500 mb-4">
           因为：{mod.reasons.join('；')}
@@ -200,21 +230,30 @@ function ResultModuleCard({ mod }: { mod: RecommendedModule }) {
       )}
 
       <div className="space-y-2">
-        {mod.sections.map((sec) => (
-          <Link
-            key={sec.sectionId}
-            to={`/unit/${mod.moduleId}/${sec.sectionId}`}
-            className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/70 hover:bg-white hover:shadow-sm transition-all group"
-          >
-            <span className={`w-2 h-2 rounded-full ${dotColor} shrink-0`} />
-            <span className="text-sm text-slate-700 flex-1">
-              {t(sec.titleKey)}
-            </span>
-            <span className="text-xs text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
-              {tc('navigatorGoToSection')} →
-            </span>
-          </Link>
-        ))}
+        {mod.sections.map((sec) => {
+          const done = visited.has(sec.sectionId);
+          return (
+            <Link
+              key={sec.sectionId}
+              to={`/unit/${mod.moduleId}/${sec.sectionId}`}
+              className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/70 hover:bg-white hover:shadow-sm transition-all group"
+            >
+              {done ? (
+                <svg className="w-4 h-4 text-emerald-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              ) : (
+                <span className={`w-2 h-2 rounded-full ${dotColor} shrink-0`} />
+              )}
+              <span className={`text-sm flex-1 ${done ? 'text-slate-400 line-through' : 'text-slate-700'}`}>
+                {t(sec.titleKey)}
+              </span>
+              <span className="text-xs text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity shrink-0">
+                {tc('navigatorGoToSection')} →
+              </span>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

@@ -54,7 +54,63 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 2. Python 基础 ─────────────────────────────────────────
+  // ── 2. 研究目标 ───────────────────────────────────────────
+  {
+    id: 'research-goal',
+    question: '你的主要研究目标更接近哪一种？',
+    options: [
+      {
+        id: 'goal-descriptive',
+        label: '描述现象 / 探索数据里有什么规律',
+        sectionIds: [
+          '01-central-tendency',
+          '02-dispersion',
+          '03-distribution',
+          '01-basic-charts',
+          '02-distribution-charts',
+          '03-collocation',
+          '05-tfidf',
+          '06-kwic',
+        ],
+        reason: '你更需要描述、可视化和探索性分析',
+      },
+      {
+        id: 'goal-hypothesis',
+        label: '检验假设 / 判断差异或关系是否可靠',
+        sectionIds: [
+          '01-sampling',
+          '03-p-value',
+          '02-confidence-interval',
+          '04-effect-size',
+          '01-t-test',
+          '03-anova',
+          '02-chi-square',
+          '05-multiple-correction',
+        ],
+        reason: '你更需要推断统计和显著性检验',
+      },
+      {
+        id: 'goal-modeling',
+        label: '建立模型 / 解释或预测一个结果变量',
+        sectionIds: [
+          '03-relationship-charts',
+          '01-linear-regression',
+          '02-logistic-regression',
+          '03-interaction',
+          '04-model-diagnostics',
+        ],
+        reason: '你更需要回归建模路线',
+      },
+      {
+        id: 'goal-unsure',
+        label: '不确定，我只是想看看该学什么',
+        sectionIds: [],
+        reason: '',
+      },
+    ],
+  },
+
+  // ── 3. Python 基础 ─────────────────────────────────────────
   {
     id: 'python-level',
     question: '你的 Python 编程基础怎么样？',
@@ -80,7 +136,7 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 3. 数据形式 ────────────────────────────────────────────
+  // ── 4. 数据形式 ────────────────────────────────────────────
   {
     id: 'data-format',
     question: '你的数据主要是哪种形式？',
@@ -106,7 +162,7 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 4. 描述统计 ────────────────────────────────────────────
+  // ── 5. 描述统计 ────────────────────────────────────────────
   {
     id: 'describe-need',
     question: '你需要计算均值、中位数、标准差等描述统计量吗？',
@@ -114,7 +170,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'describe-yes',
         label: '需要，我想了解数据的基本面貌',
-        sectionIds: ['01-central-tendency', '02-dispersion', '05-dispersion-metrics'],
+        sectionIds: ['01-central-tendency', '02-dispersion', '05-lexical-diversity'],
         reason: '你需要描述统计',
       },
       {
@@ -126,7 +182,7 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 5. 数据分布 ────────────────────────────────────────────
+  // ── 6. 数据分布 ────────────────────────────────────────────
   {
     id: 'distribution-need',
     question: '你需要了解数据的分布形态吗（正态分布、偏态、标准化）？',
@@ -146,7 +202,7 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 6. 可视化 ──────────────────────────────────────────────
+  // ── 7. 可视化 ──────────────────────────────────────────────
   {
     id: 'visualize-need',
     question: '你需要画图来展示数据吗？',
@@ -178,7 +234,7 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 7. 推断统计基础 ────────────────────────────────────────
+  // ── 8. 推断统计基础 ────────────────────────────────────────
   {
     id: 'inference-need',
     question: '你需要理解 p 值、置信区间、效应量这些推断统计概念吗？',
@@ -198,7 +254,7 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 8. 具体检验方法 ────────────────────────────────────────
+  // ── 9. 具体检验方法 ────────────────────────────────────────
   {
     id: 'test-type',
     question: '你需要做哪类具体的统计检验？',
@@ -236,7 +292,7 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 9. 文本分析 ────────────────────────────────────────────
+  // ── 10. 文本分析 ────────────────────────────────────────────
   {
     id: 'text-analysis',
     question: '你需要做哪些文本分析？',
@@ -250,13 +306,13 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'text-tfidf',
         label: 'TF-IDF / 关键词提取',
-        sectionIds: ['04-tfidf'],
+        sectionIds: ['05-tfidf'],
         reason: '你需要关键词分析',
       },
       {
         id: 'text-kwic',
         label: 'KWIC 检索（关键词上下文定位）',
-        sectionIds: ['05-kwic'],
+        sectionIds: ['06-kwic'],
         reason: '你需要 KWIC 检索',
       },
       {
@@ -268,7 +324,7 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'text-multiple',
         label: '以上多种都需要',
-        sectionIds: ['03-collocation', '04-tfidf', '05-kwic', '04-correlation'],
+        sectionIds: ['03-collocation', '05-tfidf', '06-kwic', '04-correlation'],
         reason: '你需要多种文本分析',
       },
       {
@@ -280,7 +336,7 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 10. 回归建模：因变量类型 ───────────────────────────────
+  // ── 11. 回归建模：因变量类型 ───────────────────────────────
   {
     id: 'outcome-type',
     question: '你的结果变量（因变量）是什么类型？',
@@ -306,7 +362,7 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 11. 交互效应 ───────────────────────────────────────────
+  // ── 12. 交互效应 ───────────────────────────────────────────
   {
     id: 'interaction-need',
     question: '你需要分析交互效应吗？（如自变量 A 的效果是否取决于自变量 B）？',
@@ -326,7 +382,7 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 12. 嵌套数据 / 混合效应 ────────────────────────────────
+  // ── 13. 嵌套数据 / 混合效应 ────────────────────────────────
   {
     id: 'nesting',
     question: '你的数据是否存在嵌套结构？（同一被试有多条数据、同一词项多次出现）',
@@ -364,6 +420,28 @@ export function getRecommendedModules(
         }
         break;
       }
+    }
+  }
+
+  // ── Post-processing: cross-question logic & fallback ──────────
+  const FOUNDATION_SECTIONS = [
+    '01-variables-and-types', '02-lists-and-dicts', '06-file-io',
+    '01-dataframe-basics', '02-groupby',
+  ];
+
+  // "设计研究方案" + 零基础 → 补基础包
+  if (answers.get('research-stage') === 'stage-designing' && answers.get('python-level') === 'python-zero') {
+    for (const sid of FOUNDATION_SECTIONS) {
+      if (!sectionReasons.has(sid)) {
+        sectionReasons.set(sid, '零基础需要先掌握数据处理工具');
+      }
+    }
+  }
+
+  // 空结果兜底 → 推荐基础包
+  if (sectionReasons.size === 0) {
+    for (const sid of FOUNDATION_SECTIONS) {
+      sectionReasons.set(sid, '建议从基础开始');
     }
   }
 

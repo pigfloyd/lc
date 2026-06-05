@@ -24,13 +24,7 @@
   "navigatorTitle": "研究问题导航",
   "navigatorDescription": "回答几个简单的问题，帮你找到最需要学习的知识点。",
   "navigatorLink": "研究问题导航",
-  "navigatorStartModule": "进入此模块",
   "navigatorGoToSection": "去学习",
-  "navigatorViewScenarios": "查看研究场景",
-  "navigatorViewDetails": "查看技能要求",
-  "navigatorScenarios": "研究场景",
-  "navigatorSkills": "你将能够回答",
-  "navigatorPrerequisites": "前置要求",
   "navigatorHomeEntry": "不确定从哪里开始？",
   "navigatorHomeDescription": "浏览所有研究场景，找到最适合你问题的模块。",
   "navigatorHomeCta": "打开研究导航"
