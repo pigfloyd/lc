@@ -357,6 +357,28 @@ export function useCurrentUnit(unitId: string, navMode: NavMode): UnitMeta | und
   return units.find((u) => u.id === unitId);
 }
 
+export function useAnyUnit(unitId: string, navMode: NavMode): UnitMeta | undefined {
+  const legacyUnits = useLocalizedUnits();
+  const researchUnits = useResearchUnits();
+  const toolkitUnits = useToolkitUnits();
+  const primaryUnits = navMode === 'research' ? researchUnits : toolkitUnits;
+  const secondaryUnits = navMode === 'research' ? toolkitUnits : researchUnits;
+
+  return (
+    primaryUnits.find((u) => u.id === unitId) ??
+    secondaryUnits.find((u) => u.id === unitId) ??
+    legacyUnits.find((u) => u.id === unitId)
+  );
+}
+
+function getUnitsForMode(navMode: NavMode): UnitMeta[] {
+  return navMode === 'research' ? _researchUnits : _toolkitUnits;
+}
+
+function getAlternateUnitsForMode(navMode: NavMode): UnitMeta[] {
+  return navMode === 'research' ? _toolkitUnits : _researchUnits;
+}
+
 /**
  * Next section, unified across manifest and legacy unit arrays.
  * Tries the current nav-mode's units first, then falls back to legacy UNITS.
@@ -366,10 +388,16 @@ export function getAdjacentSectionForMode(
   sectionId: string,
   navMode: NavMode,
 ): { unitId: string; sectionId: string } | null {
-  const units = navMode === 'research' ? _researchUnits : _toolkitUnits;
+  const units = getUnitsForMode(navMode);
   if (units.some((u) => u.id === unitId)) {
     return getAdjacentInPath(units, unitId, sectionId);
   }
+
+  const alternateUnits = getAlternateUnitsForMode(navMode);
+  if (alternateUnits.some((u) => u.id === unitId)) {
+    return getAdjacentInPath(alternateUnits, unitId, sectionId);
+  }
+
   return getAdjacentSection(unitId, sectionId);
 }
 
@@ -382,9 +410,15 @@ export function getPrevSectionForMode(
   sectionId: string,
   navMode: NavMode,
 ): { unitId: string; sectionId: string } | null {
-  const units = navMode === 'research' ? _researchUnits : _toolkitUnits;
+  const units = getUnitsForMode(navMode);
   if (units.some((u) => u.id === unitId)) {
     return getPrevInPath(units, unitId, sectionId);
   }
+
+  const alternateUnits = getAlternateUnitsForMode(navMode);
+  if (alternateUnits.some((u) => u.id === unitId)) {
+    return getPrevInPath(alternateUnits, unitId, sectionId);
+  }
+
   return getPrevSection(unitId, sectionId);
 }
