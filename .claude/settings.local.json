@@ -29,7 +29,10 @@
       "PowerShell(npx tsc --noEmit --pretty 2>&1 | Select-Object -First 30)",
       "PowerShell(npm run *)",
       "PowerShell(Write-Error *)",
-      "WebFetch(domain:pre.patyee.com)"
+      "WebFetch(domain:pre.patyee.com)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(echo \"Exit: $?\")"
     ]
   },
   "hooks": {
