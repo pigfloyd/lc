@@ -32,7 +32,14 @@
       "WebFetch(domain:pre.patyee.com)",
       "Bash(Select-Object Name, PSIsContainer)",
       "Bash(Format-Table -AutoSize)",
-      "Bash(echo \"Exit: $?\")"
+      "Bash(echo \"Exit: $?\")",
+      "Bash(echo \"---EXIT:$?---\")",
+      "Bash(curl -s \"http://localhost:5174/lc/src/content/unit-1/01-variables-and-types.tsx\" -w \"\\\\nHTTP %{http_code}\\\\n\")",
+      "Bash(curl -s \"http://localhost:5174/lc/\" -w \"\\\\nHTTP %{http_code}\\\\n\" -o /tmp/index.html)",
+      "Read(//tmp/**)",
+      "Bash(curl -s --noproxy '*' \"http://127.0.0.1:5174/lc/\" -w \"\\\\nHTTP %{http_code}\\\\n\" -o /tmp/index.html)",
+      "Bash(curl -s --noproxy '*' \"http://127.0.0.1:5174/lc/src/content/unit-1/01-variables-and-types.tsx\" -o /tmp/mod.js -w \"HTTP %{http_code}\\\\n\")",
+      "Bash(jobs -l)"
     ]
   },
   "hooks": {

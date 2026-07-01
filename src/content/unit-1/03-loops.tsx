@@ -544,7 +544,7 @@ function WordFrequencyAnimation() {
       </div>
 
       <div className="flex justify-center gap-4 mb-6">
-        {Object.entries(freq).map(([animal, count], i) => (
+        {Object.entries(freq).map(([animal, count]) => (
           <motion.div
             key={animal}
             initial={{ scale: 0 }}
