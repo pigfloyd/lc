@@ -39,7 +39,12 @@
       "Read(//tmp/**)",
       "Bash(curl -s --noproxy '*' \"http://127.0.0.1:5174/lc/\" -w \"\\\\nHTTP %{http_code}\\\\n\" -o /tmp/index.html)",
       "Bash(curl -s --noproxy '*' \"http://127.0.0.1:5174/lc/src/content/unit-1/01-variables-and-types.tsx\" -o /tmp/mod.js -w \"HTTP %{http_code}\\\\n\")",
-      "Bash(jobs -l)"
+      "Bash(jobs -l)",
+      "Bash(gh run *)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:pigfloyd.github.io)",
+      "Bash(Get-Content *)",
+      "Bash(Select-String -Pattern \"export default\" -Context 0,2)"
     ]
   },
   "hooks": {
