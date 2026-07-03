@@ -44,7 +44,8 @@
       "WebFetch(domain:github.com)",
       "WebFetch(domain:pigfloyd.github.io)",
       "Bash(Get-Content *)",
-      "Bash(Select-String -Pattern \"export default\" -Context 0,2)"
+      "Bash(Select-String -Pattern \"export default\" -Context 0,2)",
+      "Bash(python -c ' *)"
     ]
   },
   "hooks": {

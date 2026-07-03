@@ -68,7 +68,7 @@ export default function Sidebar() {
       {/* Unit navigation */}
       <nav className="flex-1 overflow-y-auto sidebar-scroll py-3">
         {/* Navigator link — always visible, prominently styled */}
-        <div className="px-3 mb-3">
+        <div className="px-3 mb-3 space-y-1.5">
           <NavLink
             to="/navigator"
             onClick={closeSidebar}
@@ -83,6 +83,21 @@ export default function Sidebar() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             {t('navigatorLink')}
+          </NavLink>
+          <NavLink
+            to="/lookup"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `flex items-center gap-2.5 px-3 py-2.5 text-sm font-medium rounded-lg transition-all
+              ${isActive
+                ? 'bg-emerald-500 text-white shadow-sm'
+                : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100'}`
+            }
+          >
+            <svg className="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 11-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 004.486-6.336l-3.276 3.277a3.004 3.004 0 01-2.25-2.25l3.276-3.276a4.5 4.5 0 00-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085" />
+            </svg>
+            {t('taskLookupLink')}
           </NavLink>
         </div>
 

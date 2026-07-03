@@ -1,37 +1,43 @@
 import type { SectionManifestEntry, UnitMeta, SectionMeta } from '../types/content';
 
 // ── Research modules ──────────────────────────────────────────────
+// 叙事线：准备 → 基础 → 拿数据 → 设计 → 测量 → 探索 → 关联 → 推断
+//         → 比较 → 趋势 → 决策 → 层次 → 模式发现 → 可重复性（收尾）
 export const RESEARCH_MODULES: { id: string; titleKey: string; descKey: string; order: number }[] = [
-  { id: 'foundation',        titleKey: 'research.foundation.title',        descKey: 'research.foundation.description',        order: 0 },
-  { id: 'data-acquisition',  titleKey: 'research.data-acquisition.title',  descKey: 'research.data-acquisition.description',  order: 1 },
-  { id: 'design-thinking',   titleKey: 'research.design-thinking.title',   descKey: 'research.design-thinking.description',   order: 2 },
-  { id: 'exploration',       titleKey: 'research.exploration.title',       descKey: 'research.exploration.description',       order: 3 },
-  { id: 'association',       titleKey: 'research.association.title',       descKey: 'research.association.description',       order: 4 },
-  { id: 'inference-basics',  titleKey: 'research.inference-basics.title',  descKey: 'research.inference-basics.description',  order: 5 },
-  { id: 'comparison',        titleKey: 'research.comparison.title',        descKey: 'research.comparison.description',        order: 6 },
-  { id: 'trends',            titleKey: 'research.trends.title',            descKey: 'research.trends.description',            order: 7 },
-  { id: 'decision',          titleKey: 'research.decision.title',          descKey: 'research.decision.description',          order: 8 },
-  { id: 'hierarchy',         titleKey: 'research.hierarchy.title',         descKey: 'research.hierarchy.description',         order: 9 },
-  { id: 'reliability',       titleKey: 'research.reliability.title',       descKey: 'research.reliability.description',       order: 10 },
-  { id: 'pattern-discovery', titleKey: 'research.pattern-discovery.title', descKey: 'research.pattern-discovery.description', order: 11 },
+  { id: 'prep',              titleKey: 'research.prep.title',              descKey: 'research.prep.description',              order: 0 },
+  { id: 'foundation',        titleKey: 'research.foundation.title',        descKey: 'research.foundation.description',        order: 1 },
+  { id: 'data-acquisition',  titleKey: 'research.data-acquisition.title',  descKey: 'research.data-acquisition.description',  order: 2 },
+  { id: 'design-thinking',   titleKey: 'research.design-thinking.title',   descKey: 'research.design-thinking.description',   order: 3 },
+  { id: 'reliability',       titleKey: 'research.reliability.title',       descKey: 'research.reliability.description',       order: 4 },
+  { id: 'exploration',       titleKey: 'research.exploration.title',       descKey: 'research.exploration.description',       order: 5 },
+  { id: 'association',       titleKey: 'research.association.title',       descKey: 'research.association.description',       order: 6 },
+  { id: 'inference-basics',  titleKey: 'research.inference-basics.title',  descKey: 'research.inference-basics.description',  order: 7 },
+  { id: 'comparison',        titleKey: 'research.comparison.title',        descKey: 'research.comparison.description',        order: 8 },
+  { id: 'trends',            titleKey: 'research.trends.title',            descKey: 'research.trends.description',            order: 9 },
+  { id: 'decision',          titleKey: 'research.decision.title',          descKey: 'research.decision.description',          order: 10 },
+  { id: 'hierarchy',         titleKey: 'research.hierarchy.title',         descKey: 'research.hierarchy.description',         order: 11 },
+  { id: 'pattern-discovery', titleKey: 'research.pattern-discovery.title', descKey: 'research.pattern-discovery.description', order: 12 },
+  { id: 'reproducibility',   titleKey: 'research.reproducibility.title',   descKey: 'research.reproducibility.description',   order: 13 },
 ];
 
 // ── Toolkit categories (mirrors existing unit structure) ──────────
 export const TOOLKIT_CATEGORIES: { id: string; titleKey: string; descKey: string; order: number }[] = [
-  { id: 'python',        titleKey: 'toolkit.python.title',        descKey: 'toolkit.python.description',        order: 0 },
-  { id: 'data-collection', titleKey: 'toolkit.data-collection.title', descKey: 'toolkit.data-collection.description', order: 1 },
-  { id: 'text',          titleKey: 'toolkit.text.title',          descKey: 'toolkit.text.description',          order: 2 },
-  { id: 'corpus',        titleKey: 'toolkit.corpus.title',        descKey: 'toolkit.corpus.description',        order: 3 },
-  { id: 'data',          titleKey: 'toolkit.data.title',          descKey: 'toolkit.data.description',          order: 4 },
-  { id: 'design',        titleKey: 'toolkit.design.title',        descKey: 'toolkit.design.description',        order: 5 },
-  { id: 'reliability',   titleKey: 'toolkit.reliability.title',   descKey: 'toolkit.reliability.description',   order: 6 },
-  { id: 'descriptive',   titleKey: 'toolkit.descriptive.title',   descKey: 'toolkit.descriptive.description',   order: 7 },
-  { id: 'visualization', titleKey: 'toolkit.visualization.title', descKey: 'toolkit.visualization.description', order: 8 },
-  { id: 'inference',     titleKey: 'toolkit.inference.title',     descKey: 'toolkit.inference.description',     order: 9 },
-  { id: 'tests',         titleKey: 'toolkit.tests.title',         descKey: 'toolkit.tests.description',         order: 10 },
-  { id: 'regression',    titleKey: 'toolkit.regression.title',    descKey: 'toolkit.regression.description',    order: 11 },
-  { id: 'mixed',         titleKey: 'toolkit.mixed.title',         descKey: 'toolkit.mixed.description',         order: 12 },
-  { id: 'ethics',        titleKey: 'toolkit.ethics.title',        descKey: 'toolkit.ethics.description',        order: 13 },
+  { id: 'prep',          titleKey: 'toolkit.prep.title',          descKey: 'toolkit.prep.description',          order: 0 },
+  { id: 'python',        titleKey: 'toolkit.python.title',        descKey: 'toolkit.python.description',        order: 1 },
+  { id: 'data-collection', titleKey: 'toolkit.data-collection.title', descKey: 'toolkit.data-collection.description', order: 2 },
+  { id: 'text',          titleKey: 'toolkit.text.title',          descKey: 'toolkit.text.description',          order: 3 },
+  { id: 'corpus',        titleKey: 'toolkit.corpus.title',        descKey: 'toolkit.corpus.description',        order: 4 },
+  { id: 'text-mining',   titleKey: 'toolkit.text-mining.title',   descKey: 'toolkit.text-mining.description',   order: 5 },
+  { id: 'data',          titleKey: 'toolkit.data.title',          descKey: 'toolkit.data.description',          order: 6 },
+  { id: 'design',        titleKey: 'toolkit.design.title',        descKey: 'toolkit.design.description',        order: 7 },
+  { id: 'reliability',   titleKey: 'toolkit.reliability.title',   descKey: 'toolkit.reliability.description',   order: 8 },
+  { id: 'descriptive',   titleKey: 'toolkit.descriptive.title',   descKey: 'toolkit.descriptive.description',   order: 9 },
+  { id: 'visualization', titleKey: 'toolkit.visualization.title', descKey: 'toolkit.visualization.description', order: 10 },
+  { id: 'inference',     titleKey: 'toolkit.inference.title',     descKey: 'toolkit.inference.description',     order: 11 },
+  { id: 'tests',         titleKey: 'toolkit.tests.title',         descKey: 'toolkit.tests.description',         order: 12 },
+  { id: 'regression',    titleKey: 'toolkit.regression.title',    descKey: 'toolkit.regression.description',    order: 13 },
+  { id: 'mixed',         titleKey: 'toolkit.mixed.title',         descKey: 'toolkit.mixed.description',         order: 14 },
+  { id: 'ethics',        titleKey: 'toolkit.ethics.title',        descKey: 'toolkit.ethics.description',        order: 15 },
 ];
 
 // ── Content section entries ───────────────────────────────────────
@@ -39,6 +45,30 @@ export const TOOLKIT_CATEGORIES: { id: string; titleKey: string; descKey: string
 // researchModule = null means "toolkit only" (not in research path).
 
 const CONTENT_SECTIONS: SectionManifestEntry[] = [
+  // ── unit-0: 学前准备 (3 节) ─────────────────────────────────────
+  // Research & toolkit: 都放在最前面的 prep 模块/分类
+  {
+    id: '01-intro',
+    componentPath: '../content/unit-0/01-intro',
+    titleKey: 'unit-0.sections.01-intro',
+    researchModule: 'prep', researchOrder: 1,
+    toolkitCategory: 'prep', toolkitOrder: 0,
+  },
+  {
+    id: '02-setup',
+    componentPath: '../content/unit-0/02-setup',
+    titleKey: 'unit-0.sections.02-setup',
+    researchModule: 'prep', researchOrder: 2,
+    toolkitCategory: 'prep', toolkitOrder: 1,
+  },
+  {
+    id: '03-overview',
+    componentPath: '../content/unit-0/03-overview',
+    titleKey: 'unit-0.sections.03-overview',
+    researchModule: 'prep', researchOrder: 3,
+    toolkitCategory: 'prep', toolkitOrder: 2,
+  },
+
   // ── unit-1: Python 基础 (6 节) ──────────────────────────────────
   // Research: 01+02 merged → foundation; 06 → foundation (merged w/ unit-4/01)
   // 03,04,05 → toolkit only
@@ -93,33 +123,33 @@ const CONTENT_SECTIONS: SectionManifestEntry[] = [
   },
 
   // ── data-collection: 数据收集 (4 节) ──────────────────────────────
-  // Research: toolkit only (no research module mapping)
+  // Research: 全部进入 data-acquisition（基础包之后、设计思维之前）
   {
     id: '01-file-formats',
     componentPath: '../content/data-collection/01-file-formats',
     titleKey: 'data-collection.sections.01-file-formats',
-    researchModule: null, researchOrder: -1,
+    researchModule: 'data-acquisition', researchOrder: 1,
     toolkitCategory: 'data-collection', toolkitOrder: 0,
   },
   {
     id: '02-api-access',
     componentPath: '../content/data-collection/02-api-access',
     titleKey: 'data-collection.sections.02-api-access',
-    researchModule: null, researchOrder: -1,
+    researchModule: 'data-acquisition', researchOrder: 2,
     toolkitCategory: 'data-collection', toolkitOrder: 1,
   },
   {
     id: '03-web-scraping',
     componentPath: '../content/data-collection/03-web-scraping',
     titleKey: 'data-collection.sections.03-web-scraping',
-    researchModule: null, researchOrder: -1,
+    researchModule: 'data-acquisition', researchOrder: 3,
     toolkitCategory: 'data-collection', toolkitOrder: 2,
   },
   {
     id: '04-data-integration',
     componentPath: '../content/data-collection/04-data-integration',
     titleKey: 'data-collection.sections.04-data-integration',
-    researchModule: null, researchOrder: -1,
+    researchModule: 'data-acquisition', researchOrder: 4,
     toolkitCategory: 'data-collection', toolkitOrder: 3,
   },
 
@@ -147,8 +177,8 @@ const CONTENT_SECTIONS: SectionManifestEntry[] = [
     toolkitCategory: 'text', toolkitOrder: 2,
   },
 
-  // ── unit-3: 语料分析 (5 节) ─────────────────────────────────────
-  // Research: all in module-3 (01 merged, 02 toolkit-only, 03,04,05 as-is)
+  // ── unit-3: 语料分析 (11 节) ────────────────────────────────────
+  // Research: 01 merged 进 association；02 词频紧随其后；07-11 → pattern-discovery
   {
     id: '01-tokenization',
     componentPath: '../content/unit-3/01-tokenization',
@@ -160,35 +190,35 @@ const CONTENT_SECTIONS: SectionManifestEntry[] = [
     id: '02-frequency',
     componentPath: '../content/unit-3/02-frequency',
     titleKey: 'unit-3.sections.02-frequency',
-    researchModule: null, researchOrder: -1,
+    researchModule: 'association', researchOrder: 2, // 词频是搭配/关键词的前提
     toolkitCategory: 'corpus', toolkitOrder: 1,
   },
   {
     id: '03-collocation',
     componentPath: '../content/unit-3/03-collocation',
     titleKey: 'unit-3.sections.03-collocation',
-    researchModule: 'association', researchOrder: 2,
+    researchModule: 'association', researchOrder: 3,
     toolkitCategory: 'corpus', toolkitOrder: 2,
   },
   {
     id: '04-collostruction',
     componentPath: '../content/unit-3/04-collostruction',
     titleKey: 'unit-3.sections.04-collostruction',
-    researchModule: 'association', researchOrder: 3,
+    researchModule: 'association', researchOrder: 4,
     toolkitCategory: 'corpus', toolkitOrder: 3,
   },
   {
     id: '05-tfidf',
     componentPath: '../content/unit-3/05-tfidf',
     titleKey: 'unit-3.sections.05-tfidf',
-    researchModule: 'association', researchOrder: 5,
+    researchModule: 'association', researchOrder: 6,
     toolkitCategory: 'corpus', toolkitOrder: 4,
   },
   {
     id: '06-kwic',
     componentPath: '../content/unit-3/06-kwic',
     titleKey: 'unit-3.sections.06-kwic',
-    researchModule: 'association', researchOrder: 4,
+    researchModule: 'association', researchOrder: 5,
     toolkitCategory: 'corpus', toolkitOrder: 5,
   },
   {
@@ -196,35 +226,35 @@ const CONTENT_SECTIONS: SectionManifestEntry[] = [
     componentPath: '../content/unit-3/07-text-classification',
     titleKey: 'unit-3.sections.07-text-classification',
     researchModule: 'pattern-discovery', researchOrder: 1,
-    toolkitCategory: 'corpus', toolkitOrder: 6,
+    toolkitCategory: 'text-mining', toolkitOrder: 0,
   },
   {
     id: '08-sentiment-analysis',
     componentPath: '../content/unit-3/08-sentiment-analysis',
     titleKey: 'unit-3.sections.08-sentiment-analysis',
     researchModule: 'pattern-discovery', researchOrder: 2,
-    toolkitCategory: 'corpus', toolkitOrder: 7,
+    toolkitCategory: 'text-mining', toolkitOrder: 1,
   },
   {
     id: '09-word-embeddings',
     componentPath: '../content/unit-3/09-word-embeddings',
     titleKey: 'unit-3.sections.09-word-embeddings',
     researchModule: 'pattern-discovery', researchOrder: 3,
-    toolkitCategory: 'corpus', toolkitOrder: 8,
+    toolkitCategory: 'text-mining', toolkitOrder: 2,
   },
   {
     id: '10-clustering',
     componentPath: '../content/unit-3/10-clustering',
     titleKey: 'unit-3.sections.10-clustering',
     researchModule: 'pattern-discovery', researchOrder: 4,
-    toolkitCategory: 'corpus', toolkitOrder: 9,
+    toolkitCategory: 'text-mining', toolkitOrder: 3,
   },
   {
     id: '11-dimensionality-reduction',
     componentPath: '../content/unit-3/11-dimensionality-reduction',
     titleKey: 'unit-3.sections.11-dimensionality-reduction',
     researchModule: 'pattern-discovery', researchOrder: 5,
-    toolkitCategory: 'corpus', toolkitOrder: 10,
+    toolkitCategory: 'text-mining', toolkitOrder: 4,
   },
 
   // ── unit-4: 数据整理 (4 节) ─────────────────────────────────────
@@ -399,7 +429,7 @@ const CONTENT_SECTIONS: SectionManifestEntry[] = [
     id: '04-correlation',
     componentPath: '../content/unit-8/04-correlation',
     titleKey: 'unit-8.sections.04-correlation',
-    researchModule: 'association', researchOrder: 6,
+    researchModule: 'association', researchOrder: 7,
     toolkitCategory: 'tests', toolkitOrder: 3,
   },
   {
@@ -417,8 +447,8 @@ const CONTENT_SECTIONS: SectionManifestEntry[] = [
     toolkitCategory: 'tests', toolkitOrder: 5,
   },
 
-  // ── unit-9: 回归模型 (5 节) ─────────────────────────────────────
-  // Research: 01 → module-4; 02 → module-5; 03 → module-5; 04 → module-4; 05 → module-5
+  // ── unit-9: 回归模型 (6 节) ─────────────────────────────────────
+  // Research: 01,06,04 → trends（线性回归 + 分类编码 + 诊断）；02,03,05 → decision
   {
     id: '01-linear-regression',
     componentPath: '../content/unit-9/01-linear-regression',
@@ -444,7 +474,7 @@ const CONTENT_SECTIONS: SectionManifestEntry[] = [
     id: '04-model-diagnostics',
     componentPath: '../content/unit-9/04-model-diagnostics',
     titleKey: 'unit-9.sections.04-model-diagnostics',
-    researchModule: 'trends', researchOrder: 3,
+    researchModule: 'trends', researchOrder: 4,
     toolkitCategory: 'regression', toolkitOrder: 3,
   },
   {
@@ -458,12 +488,12 @@ const CONTENT_SECTIONS: SectionManifestEntry[] = [
     id: '06-categorical-encoding',
     componentPath: '../content/unit-9/06-categorical-encoding',
     titleKey: 'unit-9.sections.06-categorical-encoding',
-    researchModule: null, researchOrder: -1,
+    researchModule: 'trends', researchOrder: 3, // 语言学自变量几乎都是分类变量
     toolkitCategory: 'regression', toolkitOrder: 5,
   },
 
-  // ── unit-10: 混合效应模型 (5 节) ─────────────────────────────────
-  // Research: all in module-6 (01+02 merged, 03 split, 04+05 merged)
+  // ── unit-10: 混合效应模型 (6 节) ─────────────────────────────────
+  // Research: 全部进入 hierarchy（01+02 merged, 04+05 merged, 06-glmm 收尾）
   {
     id: '01-why-mixed',
     componentPath: '../content/unit-10/01-why-mixed',
@@ -503,7 +533,7 @@ const CONTENT_SECTIONS: SectionManifestEntry[] = [
     id: '06-glmm',
     componentPath: '../content/unit-10/06-glmm',
     titleKey: 'unit-10.sections.06-glmm',
-    researchModule: null, researchOrder: -1,
+    researchModule: 'hierarchy', researchOrder: 5, // 二元结果 + 随机效应 = 语言学最典型分析
     toolkitCategory: 'mixed', toolkitOrder: 5,
   },
 

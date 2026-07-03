@@ -9,6 +9,8 @@ export interface UnitMeta {
   title: string;
   order: number;
   description: string;
+  /** 研究问题式副标题（仅研究路径模块有），如"A 组和 B 组有区别吗？" */
+  question?: string;
   sections: SectionMeta[];
 }
 

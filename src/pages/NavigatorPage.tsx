@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { QUESTIONS, getRecommendedModules } from '../data/quizData';
 import type { RecommendedModule } from '../data/quizData';
 
-const CACHE_KEY = 'navigator-quiz-answers';
+// v2: 问卷题目与选项 id 在情境化改版后全部更换，旧缓存直接作废
+const CACHE_KEY = 'navigator-quiz-answers-v2';
 
 function loadCachedAnswers(): Map<string, string> | null {
   try {
@@ -34,6 +35,7 @@ const slideIn = {
 };
 
 const COLORS: Record<string, string> = {
+  prep: 'border-blue-300 bg-blue-50',
   foundation: 'border-emerald-300 bg-emerald-50',
   'data-acquisition': 'border-violet-300 bg-violet-50',
   'design-thinking': 'border-indigo-300 bg-indigo-50',
@@ -50,6 +52,7 @@ const COLORS: Record<string, string> = {
 };
 
 const DOT_COLORS: Record<string, string> = {
+  prep: 'bg-blue-500',
   foundation: 'bg-emerald-500',
   'data-acquisition': 'bg-violet-500',
   'design-thinking': 'bg-indigo-500',
@@ -203,12 +206,11 @@ function getVisitedSections(): Set<string> {
   }
 }
 
-function ResultModuleCard({ mod }: { mod: RecommendedModule }) {
+function ResultModuleCard({ mod, visited }: { mod: RecommendedModule; visited: Set<string> }) {
   const { t } = useTranslation('units');
   const { t: tc } = useTranslation('common');
   const colors = COLORS[mod.moduleId] ?? 'border-slate-200 bg-slate-50';
   const dotColor = DOT_COLORS[mod.moduleId] ?? 'bg-slate-400';
-  const visited = getVisitedSections();
   const visitedCount = mod.sections.filter((s) => visited.has(s.sectionId)).length;
 
   return (
@@ -266,6 +268,7 @@ function ResultsView({
   answers: Map<string, string>;
   onRetake: () => void;
 }) {
+  const [visited] = useState(() => getVisitedSections());
   const modules = getRecommendedModules(answers);
   const totalSections = modules.reduce((sum, m) => sum + m.sections.length, 0);
 
@@ -304,19 +307,28 @@ function ResultsView({
         ) : (
           <div className="space-y-4 mb-8">
             {modules.map((mod) => (
-              <ResultModuleCard key={mod.moduleId} mod={mod} />
+              <ResultModuleCard key={mod.moduleId} mod={mod} visited={visited} />
             ))}
           </div>
         )}
 
         {modules.length > 0 && (
-          <div className="text-center">
-            <button
-              onClick={onRetake}
-              className="px-5 py-2.5 text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
+          <div className="text-center space-y-4">
+            <Link
+              to="/appendix/03-statistics-flowchart"
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-lg hover:bg-slate-100 hover:text-slate-800 transition-colors"
             >
-              重新答题
-            </button>
+              <span>🗺️</span>
+              <span>拿不准用哪种统计检验？试试交互式选择流程图 →</span>
+            </Link>
+            <div>
+              <button
+                onClick={onRetake}
+                className="px-5 py-2.5 text-sm font-medium text-slate-600 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
+              >
+                重新答题
+              </button>
+            </div>
           </div>
         )}
       </motion.div>

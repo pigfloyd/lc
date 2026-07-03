@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import type { UnitMeta, SectionMeta, NavMode } from '../types/content';
+import zhUnitsJson from '../i18n/locales/zh/units.json';
 import {
   MANIFEST,
   buildResearchUnits,
@@ -12,212 +13,73 @@ import {
 const _researchUnits = buildResearchUnits(MANIFEST);
 const _toolkitUnits = buildToolkitUnits(MANIFEST);
 
-// ── Original UNITS (backward compatible) ───────────────────────────
+// ── Legacy UNITS（从 manifest 派生，向后兼容旧 /unit/unit-X/... URL）──
+// 结构（单元划分、小节顺序）来自 manifest 的 componentPath 目录；
+// 中文标题来自 zh/units.json（i18n 兜底语言，键覆盖已由构建保证完整）。
+// 不要在这里手工添加单元/小节 —— 改 contentManifest.ts 即可。
 
-export const UNITS: UnitMeta[] = [
-  {
-    id: 'unit-0',
-    title: '学前准备',
-    order: 0,
-    description: '安装 Python 环境，了解本教材的使用方法。',
-    sections: [
-      { id: '01-intro', title: '为什么要学编程', order: 1 },
-      { id: '02-setup', title: 'Python 环境搭建', order: 2 },
-      { id: '03-overview', title: '教材使用指南', order: 3 },
-    ],
-  },
-  {
-    id: 'unit-1',
-    title: 'Python 最简生存包',
-    order: 1,
-    description: '从零开始，掌握写分析脚本必须的 Python 基础。',
-    sections: [
-      { id: '01-variables-and-types', title: '变量与数据类型', order: 1 },
-      { id: '02-lists-and-dicts', title: '列表与字典', order: 2 },
-      { id: '03-loops', title: '循环', order: 3 },
-      { id: '04-conditionals', title: '条件判断', order: 4 },
-      { id: '05-functions', title: '函数', order: 5 },
-      { id: '06-file-io', title: '文件读写', order: 6 },
-      { id: '07-numpy-basics', title: 'NumPy 数值计算', order: 7 },
-    ],
-  },
-  {
-    id: 'data-collection',
-    title: '数据收集与导入',
-    order: 2,
-    description: '从文件、API 和网页获取语言学研究数据。',
-    sections: [
-      { id: '01-file-formats', title: '语言学数据格式', order: 1 },
-      { id: '02-api-access', title: '通过 API 获取语料', order: 2 },
-      { id: '03-web-scraping', title: '网页文本采集', order: 3 },
-      { id: '04-data-integration', title: '多源数据整合', order: 4 },
-    ],
-  },
-  {
-    id: 'unit-2',
-    title: '文本处理核心',
-    order: 3,
-    description: '用 Python 处理自然语言文本的基本功。',
-    sections: [
-      { id: '01-string-methods', title: '字符串方法', order: 1 },
-      { id: '02-regex', title: '正则表达式', order: 2 },
-      { id: '03-encoding', title: '编码与中文处理', order: 3 },
-    ],
-  },
-  {
-    id: 'unit-3',
-    title: '语料分析入门',
-    order: 4,
-    description: '用 NLTK / spaCy 做分词、词频、搭配分析。',
-    sections: [
-      { id: '01-tokenization', title: '分词与词性标注', order: 1 },
-      { id: '02-frequency', title: '词频统计', order: 2 },
-      { id: '03-collocation', title: '搭配分析', order: 3 },
-      { id: '04-collostruction', title: '构式词汇关联', order: 4 },
-      { id: '05-tfidf', title: '关键词提取', order: 5 },
-      { id: '06-kwic', title: '索引行（KWIC）', order: 6 },
-      { id: '07-text-classification', title: '文本分类', order: 7 },
-      { id: '08-sentiment-analysis', title: '情感与态度分析', order: 8 },
-      { id: '09-word-embeddings', title: '词向量入门', order: 9 },
-      { id: '10-clustering', title: '文本聚类', order: 10 },
-      { id: '11-dimensionality-reduction', title: '降维与可视化', order: 11 },
-    ],
-  },
-  {
-    id: 'unit-4',
-    title: '数据整理',
-    order: 5,
-    description: '用 pandas 把分析结果整理成干净、可分析的数据表。',
-    sections: [
-      { id: '01-dataframe-basics', title: 'DataFrame 基本操作', order: 1 },
-      { id: '02-groupby', title: '分组汇总', order: 2 },
-      { id: '03-cleaning', title: '数据清洗', order: 3 },
-      { id: '04-reshape', title: '数据变形', order: 4 },
-      { id: '05-missing-data', title: '缺失数据处理', order: 5 },
-      { id: '06-outliers', title: '异常值检测与处理', order: 6 },
-    ],
-  },
-  {
-    id: 'unit-5',
-    title: '描述统计',
-    order: 6,
-    description: '学会用统计量描述你的数据，知道均值、标准差、分布的真正含义。',
-    sections: [
-      { id: '01-central-tendency', title: '集中趋势', order: 1 },
-      { id: '02-dispersion', title: '离散程度', order: 2 },
-      { id: '03-distribution', title: '分布形态', order: 3 },
-      { id: '04-normalization', title: '频率标准化', order: 4 },
-      { id: '05-lexical-diversity', title: '词汇丰富度', order: 5 },
-    ],
-  },
-  {
-    id: 'unit-6',
-    title: '数据可视化',
-    order: 7,
-    description: '画出来的图比表格更有说服力。',
-    sections: [
-      { id: '01-basic-charts', title: '基础图表', order: 1 },
-      { id: '02-distribution-charts', title: '分布图', order: 2 },
-      { id: '03-relationship-charts', title: '关系图与效应量', order: 3 },
-    ],
-  },
-  {
-    id: 'unit-7',
-    title: '推断统计基础',
-    order: 8,
-    description: '理解 p 值、置信区间、效应量——判断差异是真的还是碰巧。',
-    sections: [
-      { id: '01-sampling', title: '抽样分布与标准误', order: 1 },
-      { id: '02-confidence-interval', title: '置信区间', order: 2 },
-      { id: '03-p-value', title: 'p 值与显著性', order: 3 },
-      { id: '04-effect-size', title: '效应量', order: 4 },
-      { id: '05-power', title: '统计检验力', order: 5 },
-    ],
-  },
-  {
-    id: 'unit-8',
-    title: '常用检验方法',
-    order: 9,
-    description: '对每种研究问题找到正确的统计检验。',
-    sections: [
-      { id: '01-t-test', title: 't 检验与 Mann-Whitney U', order: 1 },
-      { id: '02-chi-square', title: '卡方检验', order: 2 },
-      { id: '03-anova', title: '方差分析（ANOVA）', order: 3 },
-      { id: '04-correlation', title: '相关分析', order: 4 },
-      { id: '05-multiple-correction', title: '多重比较校正', order: 5 },
-      { id: '06-paired-test', title: '配对检验与重复测量', order: 6 },
-    ],
-  },
-  {
-    id: 'unit-9',
-    title: '回归模型',
-    order: 10,
-    description: '同时考虑多个因素对语言现象的影响。',
-    sections: [
-      { id: '01-linear-regression', title: '线性回归', order: 1 },
-      { id: '02-logistic-regression', title: '逻辑回归', order: 2 },
-      { id: '03-interaction', title: '交互效应', order: 3 },
-      { id: '04-model-diagnostics', title: '模型诊断', order: 4 },
-      { id: '05-reporting', title: '结果报告规范', order: 5 },
-      { id: '06-categorical-encoding', title: '分类变量编码', order: 6 },
-    ],
-  },
-  {
-    id: 'unit-10',
-    title: '混合效应模型',
-    order: 11,
-    description: '语言学量化研究的标配方法——处理说话人、词项等随机效应。',
-    sections: [
-      { id: '01-why-mixed', title: '为什么需要混合模型', order: 1 },
-      { id: '02-fixed-vs-random', title: '固定效应 vs 随机效应', order: 2 },
-      { id: '03-random-slopes', title: '随机截距与随机斜率', order: 3 },
-      { id: '04-model-selection', title: '模型选择', order: 4 },
-      { id: '05-python-implementation', title: 'Python 实现', order: 5 },
-      { id: '06-glmm', title: '广义线性混合模型', order: 6 },
-    ],
-  },
-  {
-    id: 'unit-11',
-    title: '研究设计与伦理',
-    order: 12,
-    description: '动手前的思维框架——好的研究设计比好的统计方法更重要。',
-    sections: [
-      { id: '01-operationalization', title: '研究问题操作化', order: 1 },
-      { id: '02-sampling-strategy', title: '抽样策略', order: 2 },
-      { id: '03-confounding', title: '混淆变量与控制', order: 3 },
-      { id: '04-reproducibility', title: '可重复性', order: 4 },
-      { id: '05-ethics-review', title: '伦理审查与数据伦理', order: 5 },
-      { id: '06-within-between', title: '被试内 vs 被试间设计', order: 6 },
-      { id: '07-counterbalancing', title: '拉丁方与平衡设计', order: 7 },
-      { id: '08-questionnaire-design', title: '问卷设计基础', order: 8 },
-      { id: '09-likert-scales', title: 'Likert 量表与措辞偏差', order: 9 },
-    ],
-  },
-  {
-    id: 'unit-12',
-    title: '信度与测量',
-    order: 13,
-    description: '标注语料、评分实验的命门——κ、α、效度，让你的测量站得住脚。',
-    sections: [
-      { id: '01-inter-rater-kappa', title: '评分者间一致性（Cohen κ）', order: 1 },
-      { id: '02-krippendorff-alpha', title: 'Krippendorff α（多评分者）', order: 2 },
-      { id: '03-cronbach-alpha', title: 'Cronbach α（内部一致性）', order: 3 },
-      { id: '04-validity', title: '效度：构念、内容、效标', order: 4 },
-      { id: '05-measurement-levels', title: '测量层级：名义、定序、定距、定比', order: 5 },
-    ],
-  },
+const zhUnits = zhUnitsJson as Record<
+  string,
+  { title?: string; description?: string; sections?: Record<string, string> } | Record<string, string>
+>;
+
+function zhUnitMeta(unitId: string): { title?: string; description?: string; sections?: Record<string, string> } {
+  const meta = zhUnits[unitId];
+  return meta && typeof meta === 'object' ? (meta as { title?: string; description?: string; sections?: Record<string, string> }) : {};
+}
+
+function unitDirOf(componentPath: string): string {
+  // '../content/unit-1/05-functions' → 'unit-1'
+  return componentPath.split('/')[2] ?? '';
+}
+
+function buildLegacyUnits(): UnitMeta[] {
+  const dirOrder: string[] = [];
+  const sectionsByDir = new Map<string, SectionMeta[]>();
+
+  for (const entry of MANIFEST) {
+    const dir = unitDirOf(entry.componentPath);
+    if (!dir) continue;
+    let sections = sectionsByDir.get(dir);
+    if (!sections) {
+      sections = [];
+      sectionsByDir.set(dir, sections);
+      dirOrder.push(dir);
+    }
+    sections.push({
+      id: entry.id,
+      title: zhUnitMeta(dir).sections?.[entry.id] ?? '',
+      order: sections.length + 1,
+    });
+  }
+
+  return dirOrder.map((dir, i) => ({
+    id: dir,
+    title: zhUnitMeta(dir).title ?? dir,
+    order: i,
+    description: zhUnitMeta(dir).description ?? '',
+    sections: sectionsByDir.get(dir)!,
+  }));
+}
+
+export const UNITS: UnitMeta[] = buildLegacyUnits();
+
+const APPENDIX_IDS = [
+  '01-python-cheatsheet',
+  '02-pandas-cheatsheet',
+  '03-statistics-flowchart',
+  '04-common-errors',
+  '05-r-vs-python',
+  '06-resources',
+  '07-sklearn-cheatsheet',
+  '08-linguistics-datasets',
 ];
 
-export const APPENDIX_SECTIONS: SectionMeta[] = [
-  { id: '01-python-cheatsheet', title: 'Python 速查表', order: 1 },
-  { id: '02-pandas-cheatsheet', title: 'pandas 速查表', order: 2 },
-  { id: '03-statistics-flowchart', title: '统计检验选择流程图', order: 3 },
-  { id: '04-common-errors', title: '常见报错与解决方法', order: 4 },
-  { id: '05-r-vs-python', title: 'R vs Python 对照表', order: 5 },
-  { id: '06-resources', title: '推荐资源', order: 6 },
-  { id: '07-sklearn-cheatsheet', title: 'sklearn 速查表', order: 7 },
-  { id: '08-linguistics-datasets', title: '语言学数据集索引', order: 8 },
-];
+export const APPENDIX_SECTIONS: SectionMeta[] = APPENDIX_IDS.map((id, i) => ({
+  id,
+  title: (zhUnits.appendix as Record<string, string> | undefined)?.[id] ?? id,
+  order: i + 1,
+}));
 
 export function getUnitById(id: string): UnitMeta | undefined {
   return UNITS.find((u) => u.id === id);
@@ -320,6 +182,7 @@ export function useResearchUnits(): UnitMeta[] {
     ...unit,
     title: t(`research.${unit.id}.title`, unit.title),
     description: t(`research.${unit.id}.description`, unit.description),
+    question: t(`research.${unit.id}.question`, '') || undefined,
     sections: unit.sections.map((s) => {
       const entry = MANIFEST.find((e) => e.id === s.id);
       return {

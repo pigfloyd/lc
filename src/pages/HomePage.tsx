@@ -71,6 +71,27 @@ export default function HomePage() {
           </Link>
         </motion.div>
 
+        {/* Task lookup entry card */}
+        <motion.div variants={item}>
+          <Link
+            to="/lookup"
+            className="block p-5 rounded-xl bg-gradient-to-br from-emerald-50 to-teal-50 border-2 border-emerald-200 hover:border-emerald-400 hover:shadow-md transition-all h-full"
+          >
+            <div className="text-xs font-medium text-emerald-500 mb-1.5 tracking-wide">
+              {t('toolkitPath')}
+            </div>
+            <h3 className="text-lg font-semibold text-slate-800 mb-1.5">
+              {t('taskLookupHomeEntry')}
+            </h3>
+            <p className="text-sm text-slate-500 leading-relaxed mb-3">
+              {t('taskLookupHomeDescription')}
+            </p>
+            <span className="inline-flex items-center px-3 py-1 text-xs font-medium text-white bg-emerald-500 rounded-lg hover:bg-emerald-600 transition-colors">
+              {t('taskLookupHomeCta')}
+            </span>
+          </Link>
+        </motion.div>
+
         {/* Appendix card */}
         <motion.div variants={item}>
           <div className="p-5 rounded-xl bg-white border border-slate-200 h-full">

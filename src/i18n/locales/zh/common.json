@@ -27,5 +27,16 @@
   "navigatorGoToSection": "去学习",
   "navigatorHomeEntry": "不确定从哪里开始？",
   "navigatorHomeDescription": "浏览所有研究场景，找到最适合你问题的模块。",
-  "navigatorHomeCta": "打开研究导航"
+  "navigatorHomeCta": "打开研究导航",
+  "taskLookupTitle": "我要做 X，用什么工具？",
+  "taskLookupDescription": "按研究任务反查：找到你想做的事，直达对应章节。",
+  "taskLookupLink": "按任务查找",
+  "taskLookupSearchPlaceholder": "搜索任务，比如：比较、搭配、信度……",
+  "taskLookupNoResults": "没找到匹配的任务。换个关键词试试，或者用研究问题导航。",
+  "taskLookupNavigatorHint": "不知道自己该做什么？试试研究问题导航 →",
+  "taskLookupTasksCount": "{{count}} 个任务",
+  "taskLookupAppendixTag": "附录",
+  "taskLookupHomeEntry": "知道要做什么，不知道用哪个工具？",
+  "taskLookupHomeDescription": "按研究任务反查：比较差异、算信度、找搭配……直达对应章节。",
+  "taskLookupHomeCta": "打开任务索引"
 }

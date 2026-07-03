@@ -27,5 +27,16 @@
   "navigatorGoToSection": "学習を始める",
   "navigatorHomeEntry": "どこから始めればいいか分からない？",
   "navigatorHomeDescription": "すべての研究シナリオを閲覧し、あなたの課題に最適なモジュールを見つけましょう。",
-  "navigatorHomeCta": "ナビを開く"
+  "navigatorHomeCta": "ナビを開く",
+  "taskLookupTitle": "やりたいことから探す",
+  "taskLookupDescription": "研究タスクから逆引き：やりたいことを見つけて、該当する節へ直行。",
+  "taskLookupLink": "タスクから探す",
+  "taskLookupSearchPlaceholder": "タスクを検索：比較、コロケーション、信頼性……",
+  "taskLookupNoResults": "該当するタスクが見つかりません。キーワードを変えるか、研究問題ナビをお試しください。",
+  "taskLookupNavigatorHint": "何をすべきか分からない？研究問題ナビへ →",
+  "taskLookupTasksCount": "{{count}}件のタスク",
+  "taskLookupAppendixTag": "付録",
+  "taskLookupHomeEntry": "やりたいことは決まっている？",
+  "taskLookupHomeDescription": "研究タスクから逆引き：差の比較、信頼性の計算、コロケーション探し……該当する節へ直行。",
+  "taskLookupHomeCta": "タスク索引を開く"
 }

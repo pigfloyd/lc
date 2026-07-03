@@ -33,26 +33,35 @@ src/content/
 
 **章节的渲染流程：**
 
-1. `src/data/units.ts` — 静态导航数据。`UNITS[]` 数组定义每个单元的 id、标题、描述和有序章节列表。辅助函数 `getUnitById()`、`getSectionMeta()`、`getAdjacentSection()`、`getPrevSection()` 驱动所有导航。
-2. `src/data/registry.ts` — 将 `(unitId, sectionId)` 映射到 `React.lazy(() => import(...))`。每个章节是一个独立的代码分割块。
-3. `SectionPage`（`src/pages/SectionPage.tsx`）— 读取路由参数，通过 `getSectionComponent()` 查找懒加载组件，在 `<Suspense>` 中渲染，加载时显示骨架屏。
+1. `src/data/contentManifest.ts` — **单一数据源**。`CONTENT_SECTIONS[]` 里每个条目声明一个章节文件，并同时映射到两条导航路径：`researchModule`（研究路径模块，可为 `null` 表示只进工具箱）和 `toolkitCategory`（工具箱分类，必填——保证任何章节都不会成为孤儿）。`buildResearchUnits()` / `buildToolkitUnits()` 由此生成两套单元结构。
+2. `src/data/units.ts` — 导航 hooks 与向后兼容层。`useResearchUnits()` / `useToolkitUnits()` 返回本地化后的两条路径；legacy `UNITS[]` **从 manifest 自动派生**（结构来自 `componentPath` 目录，中文标题来自 `zh/units.json`），仅用于兼容旧 `/unit/unit-X/...` URL，**不要手工编辑**。
+3. `src/data/registry.ts` — 将 `(unitId, sectionId)` 映射到 `React.lazy(() => import(...))`，另有扁平的 `manifestComponentMap`（章节 id 全局唯一）供任意路径的 URL 解析组件。每个章节是一个独立的代码分割块。
+4. `SectionPage`（`src/pages/SectionPage.tsx`）— 读取路由参数，通过 `resolveSectionComponent()` 查找懒加载组件，在 `<Suspense>` 中渲染，加载时显示骨架屏。
 
-**添加新章节内容：**
+**双路径导航：** 侧边栏顶部有"研究路径 / 工具箱"切换（`navMode`，存于 SidebarContext + localStorage）。研究路径按研究问题组织（精选，部分章节合并/省略）；工具箱按工具类型组织（全集）。同一章节在两条路径下的 URL 不同（unitId 分别是模块 id / 分类 id），但都能解析。
+
+**添加新章节内容（编辑已有章节）：**
 1. 编辑 `src/content/<unit>/<section-id>.tsx` 文件
-2. 完成 — 注册表和导航数据无需更改
+2. 完成 — manifest 和导航数据无需更改
 
-**添加/删除/调整章节顺序：**
-1. 更新 `src/data/units.ts` 中的 `UNITS[]`（或附录的 `APPENDIX_SECTIONS[]`）
-2. 在 `src/content/<unit>/` 中创建对应的 `.tsx` 文件
-3. 在 `src/data/registry.ts` 中添加/更新懒加载导入项
+**新增/删除/调整章节：**
+1. 在 `src/content/<unit>/` 中创建对应的 `.tsx` 文件
+2. 在 `src/data/contentManifest.ts` 的 `CONTENT_SECTIONS[]` 中添加条目（含 researchModule / toolkitCategory 映射；章节 id 必须全局唯一）
+3. 在 `src/data/registry.ts` 中添加懒加载导入项
+4. 向 `zh/units.json` 和 `ja/units.json` 添加标题条目（`unit-X.sections.<id>`）
+5. 可选：在 `src/data/taskIndex.ts` 中补充"按任务反查"条目、在 `src/data/quizData.ts` 中补充问卷推荐
+
+`src/data/units.ts` 的 `UNITS[]` 会自动跟随 manifest，无需改动。
 
 ### 路由
 
-五条路由，全部包裹在提供侧边栏外壳的 `Layout` 中：
+七条路由，全部包裹在提供侧边栏外壳的 `Layout` 中：
 
 | 路由 | 页面 | 用途 |
 |---|---|---|
-| `/` | HomePage | 单元卡片网格及附录链接 |
+| `/` | HomePage | 单元卡片网格（随 navMode 切换）及导航/索引/附录入口 |
+| `/navigator` | NavigatorPage | 研究问题导航问卷（答题 → 推荐模块） |
+| `/lookup` | TaskLookupPage | 按任务反查工具索引（"我要做 X 用什么"，可搜索） |
 | `/unit/:unitId` | UnitPage | 单元概览及章节列表 |
 | `/unit/:unitId/:sectionId` | SectionPage | 内容（懒加载的章节组件） |
 | `/appendix/:appendixId` | AppendixPage | 附录内容 |
@@ -73,13 +82,13 @@ App
 └── SidebarProvider
     └── Routes
         └── Layout                  ← flex 容器：Sidebar + 内容区域
-            ├── Sidebar             ← 读取 units.ts，使用 SidebarContext
+            ├── Sidebar             ← 读取 units.ts 的双路径 hooks，使用 SidebarContext
             │   ├── UnitNavItem     ← 可折叠，在 SidebarContext 中切换
             │   └── SectionNavItem  ← NavLink，高亮活跃路由
             └── <Outlet />          ← 页面内容（HomePage/UnitPage/SectionPage/...）
-                ├── Breadcrumb      ← 从 units.ts 读取标题
+                ├── Breadcrumb      ← 通过 useAnyUnit 读取标题（当前路径 → 另一路径 → legacy 依次解析）
                 ├── [SectionComponent]  ← 从 registry.ts 懒加载
-                └── SectionFooter   ← 使用 getPrevSection/getAdjacentSection 的上一页/下一页链接
+                └── SectionFooter   ← 使用 getPrevSectionForMode/getAdjacentSectionForMode 的上一页/下一页链接
 ```
 
 ### 样式
@@ -104,7 +113,7 @@ AI 生成的教程内容必须尽可能简单易懂。使用动画、交互、�
 
 以下是制作每个章节时应遵循的核心原则和具体方法。
 
-### 核心理念：让小学生也能理解
+### 核心理念：让弱智也能理解
 
 写每个章节时，假设读者是**完全零基础的小学生**。用故事、动画、游戏化的方式解释概念，而不是教科书式的定义。每个抽象概念都要有一个**具体的、可视化的隐喻**。
 

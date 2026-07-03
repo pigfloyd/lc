@@ -27,6 +27,8 @@ export interface RecommendedModule {
   sections: RecommendedSection[];
 }
 
+// 设计原则：问"研究情境"（几组？测几次？因变量什么类型？），
+// 不问"你需要什么方法"——能答出方法名的学生不需要导航。
 export const QUESTIONS: QuizQuestion[] = [
   // ── 1. 研究阶段 ───────────────────────────────────────────
   {
@@ -34,22 +36,29 @@ export const QUESTIONS: QuizQuestion[] = [
     question: '你现在的研究处于哪个阶段？',
     options: [
       {
-        id: 'stage-data-ready',
-        label: '数据已经拿到了，但不知道从哪下手分析',
-        sectionIds: ['01-variables-and-types', '02-lists-and-dicts', '06-file-io', '01-dataframe-basics', '02-groupby'],
-        reason: '你需要数据处理的基础工具',
+        id: 'stage-designing',
+        label: '还在设计研究方案，没开始收数据',
+        sectionIds: [
+          '01-operationalization',
+          '03-confounding',
+          '06-within-between',
+          '02-sampling-strategy',
+          '05-power',
+          '04-reproducibility',
+        ],
+        reason: '设计阶段就要想清楚操作化、混淆控制和样本量',
       },
       {
-        id: 'stage-have-data',
-        label: '有数据，想知道具体用什么统计方法',
+        id: 'stage-analyzing',
+        label: '数据已经在手（或快到手了），准备开始分析',
         sectionIds: [],
         reason: '',
       },
       {
-        id: 'stage-designing',
-        label: '还在设计研究方案，没开始收数据',
-        sectionIds: ['01-operationalization', '02-sampling-strategy', '05-power', '03-confounding', '04-reproducibility'],
-        reason: '你在研究设计阶段',
+        id: 'stage-writing',
+        label: '分析做完了，正在写论文 / 报告',
+        sectionIds: ['05-reporting', '04-reproducibility'],
+        reason: '写作阶段的关键是规范报告和可重复性',
       },
     ],
   },
@@ -68,11 +77,8 @@ export const QUESTIONS: QuizQuestion[] = [
           '03-distribution',
           '01-basic-charts',
           '02-distribution-charts',
-          '03-collocation',
-          '05-tfidf',
-          '06-kwic',
         ],
-        reason: '你更需要描述、可视化和探索性分析',
+        reason: '你更需要描述统计与可视化',
       },
       {
         id: 'goal-hypothesis',
@@ -82,12 +88,8 @@ export const QUESTIONS: QuizQuestion[] = [
           '03-p-value',
           '02-confidence-interval',
           '04-effect-size',
-          '01-t-test',
-          '03-anova',
-          '02-chi-square',
-          '05-multiple-correction',
         ],
-        reason: '你更需要推断统计和显著性检验',
+        reason: '你需要先理解推断统计的逻辑',
       },
       {
         id: 'goal-modeling',
@@ -95,11 +97,21 @@ export const QUESTIONS: QuizQuestion[] = [
         sectionIds: [
           '03-relationship-charts',
           '01-linear-regression',
-          '02-logistic-regression',
-          '03-interaction',
+          '06-categorical-encoding',
           '04-model-diagnostics',
         ],
         reason: '你更需要回归建模路线',
+      },
+      {
+        id: 'goal-discovery',
+        label: '让机器帮我发现文本中的类别、主题或相似性',
+        sectionIds: [
+          '09-word-embeddings',
+          '07-text-classification',
+          '10-clustering',
+          '11-dimensionality-reduction',
+        ],
+        reason: '你需要模式发现的工具箱',
       },
       {
         id: 'goal-unsure',
@@ -118,8 +130,15 @@ export const QUESTIONS: QuizQuestion[] = [
       {
         id: 'python-zero',
         label: '完全零基础，没写过代码',
-        sectionIds: ['01-variables-and-types', '02-lists-and-dicts', '06-file-io', '01-dataframe-basics', '02-groupby'],
-        reason: '你需要从 Python 基础开始',
+        sectionIds: [
+          '02-setup',
+          '01-variables-and-types',
+          '02-lists-and-dicts',
+          '06-file-io',
+          '01-dataframe-basics',
+          '02-groupby',
+        ],
+        reason: '先把环境装好，从 Python 基础开始',
       },
       {
         id: 'python-basic',
@@ -136,7 +155,43 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 4. 数据形式 ────────────────────────────────────────────
+  // ── 4. 数据来源 ────────────────────────────────────────────
+  {
+    id: 'data-source',
+    question: '你的数据需要自己收集吗？打算怎么收？',
+    options: [
+      {
+        id: 'source-online',
+        label: '要从网页、在线语料库或 API 获取',
+        sectionIds: [
+          '01-file-formats',
+          '02-api-access',
+          '03-web-scraping',
+          '04-data-integration',
+        ],
+        reason: '你需要数据获取技能',
+      },
+      {
+        id: 'source-experiment',
+        label: '要通过实验或问卷收集（有真人被试）',
+        sectionIds: [
+          '06-within-between',
+          '07-counterbalancing',
+          '08-questionnaire-design',
+          '09-likert-scales',
+        ],
+        reason: '你需要实验与问卷设计方法',
+      },
+      {
+        id: 'source-ready',
+        label: '不需要收集，数据已经在手',
+        sectionIds: [],
+        reason: '',
+      },
+    ],
+  },
+
+  // ── 5. 数据形式 ────────────────────────────────────────────
   {
     id: 'data-format',
     question: '你的数据主要是哪种形式？',
@@ -149,7 +204,7 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'data-text',
-        label: '主要是文本数据（语料、问卷开放题等）',
+        label: '主要是文本数据（语料、访谈转写、开放题回答）',
         sectionIds: ['01-string-methods', '01-tokenization'],
         reason: '你需要文本处理基础',
       },
@@ -162,39 +217,95 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 5. 描述统计 ────────────────────────────────────────────
+  // ── 6. 标注与评分（→ 信度模块）─────────────────────────────
   {
-    id: 'describe-need',
-    question: '你需要计算均值、中位数、标准差等描述统计量吗？',
+    id: 'annotation',
+    question: '你的研究涉及人工标注或主观评分吗？',
     options: [
       {
-        id: 'describe-yes',
-        label: '需要，我想了解数据的基本面貌',
-        sectionIds: ['01-central-tendency', '02-dispersion', '05-lexical-diversity'],
-        reason: '你需要描述统计',
+        id: 'annotate-raters',
+        label: '涉及，多个人标注 / 评分同一批材料（如标注语料、作文评分、可接受性判断）',
+        sectionIds: ['01-inter-rater-kappa', '02-krippendorff-alpha', '04-validity'],
+        reason: '多人标注必须报告评分者间信度',
       },
       {
-        id: 'describe-no',
-        label: '不需要 / 已经会了',
+        id: 'annotate-scale',
+        label: '涉及，用多题项量表测态度或能力（如语言态度问卷）',
+        sectionIds: ['03-cronbach-alpha', '04-validity', '09-likert-scales'],
+        reason: '量表需要检验内部一致性',
+      },
+      {
+        id: 'annotate-no',
+        label: '不涉及',
         sectionIds: [],
         reason: '',
       },
     ],
   },
 
-  // ── 6. 数据分布 ────────────────────────────────────────────
+  // ── 7. 比较结构（代替"你需要哪种检验"）─────────────────────
   {
-    id: 'distribution-need',
-    question: '你需要了解数据的分布形态吗（正态分布、偏态、标准化）？',
+    id: 'comparison',
+    question: '你需要比较组或条件之间的差异吗？想一想你的研究设计：',
     options: [
       {
-        id: 'dist-yes',
-        label: '需要，我想知道数据符不符合正态分布、要不要做标准化',
-        sectionIds: ['03-distribution', '04-normalization'],
-        reason: '你需要了解数据分布',
+        id: 'compare-two',
+        label: '比较两组（如母语者 vs 学习者）',
+        sectionIds: ['01-t-test'],
+        reason: '两组比较从 t 检验（或其非参数替代）入手',
       },
       {
-        id: 'dist-no',
+        id: 'compare-multi',
+        label: '比较三组及以上（如初 / 中 / 高级水平）',
+        sectionIds: ['03-anova', '05-multiple-correction'],
+        reason: '多组比较用 ANOVA，别忘了多重比较校正',
+      },
+      {
+        id: 'compare-paired',
+        label: '同一批被试 / 文本测了多次（如前测 vs 后测）',
+        sectionIds: ['06-paired-test'],
+        reason: '重复测量要用配对检验',
+      },
+      {
+        id: 'compare-counts',
+        label: '比较的是频数或比例（如某构式在两种语体中出现的次数）',
+        sectionIds: ['02-chi-square'],
+        reason: '频数数据用卡方检验',
+      },
+      {
+        id: 'compare-mixed',
+        label: '以上多种情况都有',
+        sectionIds: [
+          '01-t-test',
+          '06-paired-test',
+          '03-anova',
+          '02-chi-square',
+          '05-multiple-correction',
+        ],
+        reason: '你需要多种比较方法',
+      },
+      {
+        id: 'compare-no',
+        label: '不涉及组间比较',
+        sectionIds: [],
+        reason: '',
+      },
+    ],
+  },
+
+  // ── 8. 变量相关 ────────────────────────────────────────────
+  {
+    id: 'correlation',
+    question: '你需要分析两个数值变量是否相关吗？（如词频高低 ↔ 反应时长短）',
+    options: [
+      {
+        id: 'corr-yes',
+        label: '需要，我想知道两个变量是否一起变化',
+        sectionIds: ['04-correlation', '03-relationship-charts'],
+        reason: '你需要相关分析',
+      },
+      {
+        id: 'corr-no',
         label: '不需要',
         sectionIds: [],
         reason: '',
@@ -202,156 +313,22 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 7. 可视化 ──────────────────────────────────────────────
-  {
-    id: 'visualize-need',
-    question: '你需要画图来展示数据吗？',
-    options: [
-      {
-        id: 'viz-basic',
-        label: '需要画柱状图、折线图等基础图表',
-        sectionIds: ['01-basic-charts'],
-        reason: '你需要基础图表',
-      },
-      {
-        id: 'viz-distribution',
-        label: '需要画直方图、箱线图等分布图',
-        sectionIds: ['02-distribution-charts'],
-        reason: '你需要分布图表',
-      },
-      {
-        id: 'viz-all',
-        label: '基础图表和分布图都需要',
-        sectionIds: ['01-basic-charts', '02-distribution-charts'],
-        reason: '你需要多种图表',
-      },
-      {
-        id: 'viz-no',
-        label: '暂时不需要画图',
-        sectionIds: [],
-        reason: '',
-      },
-    ],
-  },
-
-  // ── 8. 推断统计基础 ────────────────────────────────────────
-  {
-    id: 'inference-need',
-    question: '你需要理解 p 值、置信区间、效应量这些推断统计概念吗？',
-    options: [
-      {
-        id: 'inference-yes',
-        label: '需要，我想从样本推断总体',
-        sectionIds: ['01-sampling', '02-confidence-interval', '03-p-value', '04-effect-size'],
-        reason: '你需要推断统计基础',
-      },
-      {
-        id: 'inference-no',
-        label: '不需要，我只做描述性分析',
-        sectionIds: [],
-        reason: '',
-      },
-    ],
-  },
-
-  // ── 9. 具体检验方法 ────────────────────────────────────────
-  {
-    id: 'test-type',
-    question: '你需要做哪类具体的统计检验？',
-    options: [
-      {
-        id: 'test-ttest',
-        label: 't 检验（比较两组差异，如母语者 vs 学习者）',
-        sectionIds: ['01-t-test'],
-        reason: '你需要 t 检验',
-      },
-      {
-        id: 'test-anova',
-        label: '方差分析 ANOVA（比较多组差异）',
-        sectionIds: ['03-anova'],
-        reason: '你需要 ANOVA',
-      },
-      {
-        id: 'test-chisq',
-        label: '卡方检验（分析分类数据的关联）',
-        sectionIds: ['02-chi-square'],
-        reason: '你需要卡方检验',
-      },
-      {
-        id: 'test-multiple',
-        label: '以上多种都需要',
-        sectionIds: ['01-t-test', '03-anova', '02-chi-square', '05-multiple-correction'],
-        reason: '你需要多种检验方法',
-      },
-      {
-        id: 'test-none',
-        label: '都不需要',
-        sectionIds: [],
-        reason: '',
-      },
-    ],
-  },
-
-  // ── 10. 文本分析 ────────────────────────────────────────────
-  {
-    id: 'text-analysis',
-    question: '你需要做哪些文本分析？',
-    options: [
-      {
-        id: 'text-collocation',
-        label: '搭配分析（词语共现、互信息）',
-        sectionIds: ['03-collocation'],
-        reason: '你需要搭配分析',
-      },
-      {
-        id: 'text-tfidf',
-        label: 'TF-IDF / 关键词提取',
-        sectionIds: ['05-tfidf'],
-        reason: '你需要关键词分析',
-      },
-      {
-        id: 'text-kwic',
-        label: 'KWIC 检索（关键词上下文定位）',
-        sectionIds: ['06-kwic'],
-        reason: '你需要 KWIC 检索',
-      },
-      {
-        id: 'text-correlation',
-        label: '词语之间的相关性分析',
-        sectionIds: ['04-correlation'],
-        reason: '你需要相关性分析',
-      },
-      {
-        id: 'text-multiple',
-        label: '以上多种都需要',
-        sectionIds: ['03-collocation', '05-tfidf', '06-kwic', '04-correlation'],
-        reason: '你需要多种文本分析',
-      },
-      {
-        id: 'text-none',
-        label: '不涉及文本分析',
-        sectionIds: [],
-        reason: '',
-      },
-    ],
-  },
-
-  // ── 11. 回归建模：因变量类型 ───────────────────────────────
+  // ── 9. 回归建模：因变量类型 ───────────────────────────────
   {
     id: 'outcome-type',
-    question: '你的结果变量（因变量）是什么类型？',
+    question: '如果要建模，你的结果变量（因变量）是什么类型？',
     options: [
       {
         id: 'outcome-continuous',
-        label: '连续变量（反应时、评分、频次等）→ 适合线性回归',
-        sectionIds: ['03-relationship-charts', '01-linear-regression', '04-model-diagnostics'],
-        reason: '你需要线性回归',
+        label: '连续数值（反应时、评分、频次等）',
+        sectionIds: ['01-linear-regression', '06-categorical-encoding', '04-model-diagnostics'],
+        reason: '连续因变量适合线性回归',
       },
       {
         id: 'outcome-binary',
-        label: '分类/二元选择（正确/错误、选A/选B）→ 适合逻辑回归',
-        sectionIds: ['02-logistic-regression', '05-reporting'],
-        reason: '你需要逻辑回归',
+        label: '二元选择（正确 / 错误、选 A / 选 B、有 / 无某形式）',
+        sectionIds: ['02-logistic-regression', '06-categorical-encoding'],
+        reason: '二元因变量适合逻辑回归',
       },
       {
         id: 'outcome-none',
@@ -362,10 +339,10 @@ export const QUESTIONS: QuizQuestion[] = [
     ],
   },
 
-  // ── 12. 交互效应 ───────────────────────────────────────────
+  // ── 10. 交互效应 ───────────────────────────────────────────
   {
-    id: 'interaction-need',
-    question: '你需要分析交互效应吗？（如自变量 A 的效果是否取决于自变量 B）？',
+    id: 'interaction',
+    question: '你需要分析交互效应吗？（因素 A 的作用是否取决于因素 B）',
     options: [
       {
         id: 'interaction-yes',
@@ -375,27 +352,87 @@ export const QUESTIONS: QuizQuestion[] = [
       },
       {
         id: 'interaction-no',
-        label: '不需要',
+        label: '不需要 / 不确定',
         sectionIds: [],
         reason: '',
       },
     ],
   },
 
-  // ── 13. 嵌套数据 / 混合效应 ────────────────────────────────
+  // ── 11. 嵌套数据 / 混合效应 ────────────────────────────────
   {
     id: 'nesting',
-    question: '你的数据是否存在嵌套结构？（同一被试有多条数据、同一词项多次出现）',
+    question: '你的数据有嵌套结构吗？（同一被试贡献多条数据、同一词项反复出现）',
     options: [
       {
         id: 'nesting-yes',
-        label: '是，每个被试 / 词项都有多条记录',
-        sectionIds: ['01-why-mixed', '02-fixed-vs-random', '03-random-slopes', '04-model-selection', '05-python-implementation'],
-        reason: '你需要混合效应模型',
+        label: '有，每个被试 / 词项都有多条记录',
+        sectionIds: [
+          '01-why-mixed',
+          '02-fixed-vs-random',
+          '03-random-slopes',
+          '04-model-selection',
+          '05-python-implementation',
+        ],
+        reason: '嵌套数据需要混合效应模型',
       },
       {
         id: 'nesting-no',
-        label: '否 / 不太确定',
+        label: '没有 / 不太确定',
+        sectionIds: [],
+        reason: '',
+      },
+    ],
+  },
+
+  // ── 12. 文本分析要回答的问题 ───────────────────────────────
+  {
+    id: 'text-question',
+    question: '关于文本或语料，你想回答哪类问题？',
+    options: [
+      {
+        id: 'text-usage',
+        label: '某个词 / 结构在语料里是怎么用的（查上下文）',
+        sectionIds: ['01-tokenization', '06-kwic'],
+        reason: '你需要 KWIC 检索',
+      },
+      {
+        id: 'text-lexical',
+        label: '词频、关键词或词汇丰富度（如语体对比、二语写作发展）',
+        sectionIds: ['02-frequency', '05-tfidf', '04-normalization', '05-lexical-diversity'],
+        reason: '你需要词汇计量方法',
+      },
+      {
+        id: 'text-cooccur',
+        label: '哪些词 / 构式经常一起出现（搭配、构式偏好）',
+        sectionIds: ['03-collocation', '04-collostruction'],
+        reason: '你需要搭配与构式关联分析',
+      },
+      {
+        id: 'text-sentiment',
+        label: '文本表达的情感或态度倾向',
+        sectionIds: ['08-sentiment-analysis'],
+        reason: '你需要情感分析',
+      },
+      {
+        id: 'text-multi',
+        label: '以上多种都需要',
+        sectionIds: [
+          '01-tokenization',
+          '06-kwic',
+          '02-frequency',
+          '05-tfidf',
+          '04-normalization',
+          '05-lexical-diversity',
+          '03-collocation',
+          '04-collostruction',
+          '08-sentiment-analysis',
+        ],
+        reason: '你需要多种文本分析方法',
+      },
+      {
+        id: 'text-no',
+        label: '不涉及文本分析',
         sectionIds: [],
         reason: '',
       },
@@ -408,40 +445,61 @@ export function getRecommendedModules(
   answers: Map<string, string>,
 ): RecommendedModule[] {
   const sectionReasons = new Map<string, string>();
+  const addSection = (sid: string, reason: string) => {
+    if (!sectionReasons.has(sid)) sectionReasons.set(sid, reason);
+  };
 
   for (const [, optionId] of answers) {
     for (const q of QUESTIONS) {
       const opt = q.options.find((o) => o.id === optionId);
       if (opt) {
-        for (const sid of opt.sectionIds) {
-          if (!sectionReasons.has(sid)) {
-            sectionReasons.set(sid, opt.reason);
-          }
-        }
+        for (const sid of opt.sectionIds) addSection(sid, opt.reason);
         break;
       }
     }
   }
 
-  // ── Post-processing: cross-question logic & fallback ──────────
-  const FOUNDATION_SECTIONS = [
-    '01-variables-and-types', '02-lists-and-dicts', '06-file-io',
-    '01-dataframe-basics', '02-groupby',
-  ];
+  // ── 跨题后处理：问卷答不出来的组合逻辑在这里补 ──────────────
 
-  // "设计研究方案" + 零基础 → 补基础包
-  if (answers.get('research-stage') === 'stage-designing' && answers.get('python-level') === 'python-zero') {
-    for (const sid of FOUNDATION_SECTIONS) {
-      if (!sectionReasons.has(sid)) {
-        sectionReasons.set(sid, '零基础需要先掌握数据处理工具');
-      }
+  const moduleOf = (sid: string) =>
+    MANIFEST.find((e) => e.id === sid && !e.isScenario)?.researchModule ?? null;
+  const hasModule = (mods: string[]) =>
+    [...sectionReasons.keys()].some((sid) => {
+      const m = moduleOf(sid);
+      return m !== null && mods.includes(m);
+    });
+
+  // 二元结果 + 嵌套数据 → 广义线性混合模型
+  if (
+    answers.get('nesting') === 'nesting-yes' &&
+    answers.get('outcome-type') === 'outcome-binary'
+  ) {
+    addSection('06-glmm', '二元结果 + 嵌套数据，正是广义线性混合模型的用武之地');
+  }
+
+  // 要做检验 / 建模，但没有任何描述统计 → 补"先看数据长什么样"
+  if (
+    hasModule(['comparison', 'trends', 'decision', 'hierarchy']) &&
+    !hasModule(['exploration'])
+  ) {
+    for (const sid of ['01-central-tendency', '02-dispersion', '03-distribution', '01-basic-charts']) {
+      addSection(sid, '做检验或建模之前，先了解数据的基本面貌');
     }
+  }
+
+  // 要做统计检验 → 先分清变量的测量层级
+  if (hasModule(['comparison'])) {
+    addSection('05-measurement-levels', '选检验方法的前提是分清变量的测量层级');
   }
 
   // 空结果兜底 → 推荐基础包
   if (sectionReasons.size === 0) {
+    const FOUNDATION_SECTIONS = [
+      '01-variables-and-types', '02-lists-and-dicts', '06-file-io',
+      '01-dataframe-basics', '02-groupby',
+    ];
     for (const sid of FOUNDATION_SECTIONS) {
-      sectionReasons.set(sid, '建议从基础开始');
+      addSection(sid, '建议从基础开始');
     }
   }
 

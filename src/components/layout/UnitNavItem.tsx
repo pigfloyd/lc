@@ -18,17 +18,24 @@ export default function UnitNavItem({ unit, onNavigate }: UnitNavItemProps) {
     <div>
       <button
         onClick={() => toggleUnit(unit.id)}
-        className={`w-full flex items-center gap-2 px-5 py-2 text-left transition-colors
+        className={`w-full flex items-start gap-2 px-5 py-2 text-left transition-colors
           ${isActive ? 'text-blue-700' : 'text-slate-700 hover:text-slate-900'}`}
       >
         <svg
-          className={`w-3 h-3 shrink-0 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
+          className={`w-3 h-3 shrink-0 mt-1 transition-transform duration-200 ${isExpanded ? 'rotate-90' : ''}`}
           fill="none" viewBox="0 0 24 24" stroke="currentColor"
         >
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
-        <span className="text-sm font-medium truncate">
-          {unit.title}
+        <span className="min-w-0">
+          <span className="block text-sm font-medium truncate">
+            {unit.title}
+          </span>
+          {unit.question && (
+            <span className={`block text-xs truncate ${isActive ? 'text-blue-400' : 'text-slate-400'}`}>
+              {unit.question}
+            </span>
+          )}
         </span>
       </button>
 

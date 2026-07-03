@@ -17,7 +17,18 @@
       "03-loops": "ループ",
       "04-conditionals": "条件分岐",
       "05-functions": "関数",
-      "06-file-io": "ファイル入出力"
+      "06-file-io": "ファイル入出力",
+      "07-numpy-basics": "NumPy 数値計算"
+    }
+  },
+  "data-collection": {
+    "title": "データ収集とインポート",
+    "description": "ファイル・API・Web から言語学研究データを取得します。",
+    "sections": {
+      "01-file-formats": "言語学データの形式",
+      "02-api-access": "API によるコーパス取得",
+      "03-web-scraping": "Web テキスト収集",
+      "04-data-integration": "複数ソースのデータ統合"
     }
   },
   "unit-2": {
@@ -38,7 +49,12 @@
       "03-collocation": "コロケーション分析",
       "04-collostruction": "構文-語彙連関（コロストラクション）",
       "05-tfidf": "キーワード抽出",
-      "06-kwic": "KWIC（コンテクスト付き索引）"
+      "06-kwic": "KWIC（コンテクスト付き索引）",
+      "07-text-classification": "テキスト分類",
+      "08-sentiment-analysis": "感情・態度分析",
+      "09-word-embeddings": "単語ベクトル入門",
+      "10-clustering": "テキストクラスタリング",
+      "11-dimensionality-reduction": "次元削減と可視化"
     }
   },
   "unit-4": {
@@ -48,7 +64,9 @@
       "01-dataframe-basics": "DataFrame 基本操作",
       "02-groupby": "グループ集計",
       "03-cleaning": "データクリーニング",
-      "04-reshape": "データ変形"
+      "04-reshape": "データ変形",
+      "05-missing-data": "欠損値の処理",
+      "06-outliers": "外れ値の検出と処理"
     }
   },
   "unit-5": {
@@ -59,7 +77,7 @@
       "02-dispersion": "散布度",
       "03-distribution": "分布の形状",
       "04-normalization": "頻度の標準化",
-      "05-dispersion-metrics": "分散指標"
+      "05-lexical-diversity": "語彙の豊かさ"
     }
   },
   "unit-6": {
@@ -90,7 +108,8 @@
       "02-chi-square": "カイ二乗検定",
       "03-anova": "分散分析（ANOVA）",
       "04-correlation": "相関分析",
-      "05-multiple-correction": "多重比較補正"
+      "05-multiple-correction": "多重比較補正",
+      "06-paired-test": "対応のある検定と反復測定"
     }
   },
   "unit-9": {
@@ -101,7 +120,8 @@
       "02-logistic-regression": "ロジスティック回帰",
       "03-interaction": "交互作用",
       "04-model-diagnostics": "モデル診断",
-      "05-reporting": "結果報告の基準"
+      "05-reporting": "結果報告の基準",
+      "06-categorical-encoding": "カテゴリ変数のコーディング"
     }
   },
   "unit-10": {
@@ -112,7 +132,8 @@
       "02-fixed-vs-random": "固定効果 vs ランダム効果",
       "03-random-slopes": "ランダム切片とランダム傾き",
       "04-model-selection": "モデル選択",
-      "05-python-implementation": "Python での実装"
+      "05-python-implementation": "Python での実装",
+      "06-glmm": "一般化線形混合モデル"
     }
   },
   "unit-11": {
@@ -122,7 +143,23 @@
       "01-operationalization": "研究課題の操作化",
       "02-sampling-strategy": "サンプリング戦略",
       "03-confounding": "交絡変数と制御",
-      "04-reproducibility": "再現可能性"
+      "04-reproducibility": "再現可能性",
+      "05-ethics-review": "倫理審査とデータ倫理",
+      "06-within-between": "被験者内 vs 被験者間デザイン",
+      "07-counterbalancing": "ラテン方格とカウンターバランス",
+      "08-questionnaire-design": "アンケート設計の基礎",
+      "09-likert-scales": "リッカート尺度と文言バイアス"
+    }
+  },
+  "unit-12": {
+    "title": "信頼性と測定",
+    "description": "アノテーション・評定実験の要——κ、α、妥当性で、あなたの測定を確かなものに。",
+    "sections": {
+      "01-inter-rater-kappa": "評定者間一致（Cohen κ）",
+      "02-krippendorff-alpha": "Krippendorff α（多評定者）",
+      "03-cronbach-alpha": "Cronbach α（内的整合性）",
+      "04-validity": "妥当性：構成概念・内容・基準",
+      "05-measurement-levels": "測定水準：名義・順序・間隔・比率"
     }
   },
   "appendix": {
@@ -131,66 +168,94 @@
     "03-statistics-flowchart": "統計検定選択フローチャート",
     "04-common-errors": "よくあるエラーと解決方法",
     "05-r-vs-python": "R vs Python 対照表",
-    "06-resources": "推奨リソース"
+    "06-resources": "推奨リソース",
+    "07-sklearn-cheatsheet": "sklearn チートシート",
+    "08-linguistics-datasets": "言語学データセット索引"
   },
   "research": {
+    "prep": {
+      "title": "事前準備",
+      "question": "始める前に何を準備する？",
+      "description": "Python 環境をインストールし、本教材の使い方を理解します。"
+    },
     "foundation": {
       "title": "基礎パック",
+      "question": "データを手にしたら何ができればいい？",
       "description": "データを手に入れたら、まず何をすべきか？——Pythonの基本語彙、データの読み込み、フィルタリングと集計。"
     },
     "data-acquisition": {
       "title": "データ取得",
+      "question": "研究データはどこから？",
       "description": "ファイル、API、Webから言語学研究データを取得する。"
     },
     "design-thinking": {
       "title": "研究デザイン思考",
+      "question": "分析の前に研究をどう設計する？",
       "description": "分析に着手する前に考えるべき二つのこと——研究課題の操作化と交絡変数の特定。"
     },
     "exploration": {
       "title": "記述と探索",
+      "question": "データはどんな形？",
       "description": "データはどんな形？——平均値から分布、可視化まで、データの基本像を把握する。"
     },
     "association": {
       "title": "関連と共起",
-      "description": "単語と単語の間にはどんな関係が？——コロケーション分析、KWIC、キーワード抽出、統計的相関。"
+      "question": "単語と単語の間にはどんな関係が？",
+      "description": "単語と単語の間にはどんな関係が？——語彙頻度、コロケーション分析、KWIC、キーワード抽出、統計的相関。"
     },
     "inference-basics": {
       "title": "推測統計の本質",
+      "question": "サンプルから母集団が分かる？",
       "description": "サンプルから母集団を推論する論理——標本分布、p値、信頼区間、効果量、サンプリング戦略、検出力。"
     },
     "comparison": {
       "title": "グループ間比較",
+      "question": "A群とB群に違いはある？",
       "description": "A群とB群に違いはある？——t検定、対応のある検定、ANOVA、カイ二乗、多重比較補正。"
     },
     "trends": {
       "title": "傾向と変化",
-      "description": "特徴Xはどう変化している？——線形回帰、重回帰、交互作用、モデル診断。"
+      "question": "特徴Xはどう変化している？",
+      "description": "特徴Xはどう変化している？——関係図と効果量、線形回帰、カテゴリ変数のコーディング、モデル診断。"
     },
     "decision": {
       "title": "選択と決定",
-      "description": "なぜAではなくBを選ぶのか？——ロジスティック回帰、カテゴリ変数のコーディング、モデル診断と結果報告。"
+      "question": "なぜAではなくBを選ぶ？",
+      "description": "なぜAではなくBを選ぶのか？——ロジスティック回帰、交互作用、結果報告の作法。"
     },
     "hierarchy": {
       "title": "変異と階層",
-      "description": "個人差をどう扱うか？——混合効果モデル、言語学の定量研究の標準手法。"
+      "question": "個人差をどう扱う？",
+      "description": "個人差をどう扱うか？——混合効果モデルと一般化線形混合モデル、言語学の定量研究の標準手法。"
     },
     "reproducibility": {
       "title": "再現可能性",
+      "question": "他の人が結果を再現できる？",
       "description": "研究プロセスを固定する——コード、データ、レポート、他者があなたの結果を再現できるように。"
     },
     "pattern-discovery": {
       "title": "パターン発見",
+      "question": "データにどんなカテゴリが隠れている？",
       "description": "データにどんなカテゴリが隠れている？——テキスト分類、感情分析、単語ベクトル、クラスタリングと次元削減。"
     },
     "reliability": {
       "title": "信頼性と測定",
+      "question": "その測定は信頼できる？",
       "description": "アノテーションと評価実験の要——κ、α、妥当性。あなたの測定を確かなものに。"
     }
   },
   "toolkit": {
+    "prep": {
+      "title": "事前準備",
+      "description": "Python 環境をインストールし、本教材の使い方を理解します。"
+    },
     "python": {
       "title": "Python 基礎",
       "description": "ゼロから始めて、分析スクリプトに必要なPythonの基礎を習得。"
+    },
+    "data-collection": {
+      "title": "データ収集とインポート",
+      "description": "ファイル・API・Web から言語学研究データを取得。"
     },
     "text": {
       "title": "テキスト処理",
@@ -199,6 +264,10 @@
     "corpus": {
       "title": "コーパス分析ツール",
       "description": "NLTK / spaCyを使った分かち書き、語彙頻度、コロケーション分析。"
+    },
+    "text-mining": {
+      "title": "テキストマイニングと機械学習",
+      "description": "テキスト分類、感情分析、単語ベクトル、クラスタリング、次元削減——機械にテキストからパターンを発見させる。"
     },
     "data": {
       "title": "データ整理",
@@ -231,6 +300,10 @@
     "design": {
       "title": "研究デザイン",
       "description": "研究課題の操作化、サンプリング戦略、交絡変数の特定——実践前の設計フレームワーク。"
+    },
+    "reliability": {
+      "title": "信頼性と測定",
+      "description": "Cohen κ / Krippendorff α / Cronbach α / 妥当性 / 測定水準——測定の確かさを検証する。"
     },
     "ethics": {
       "title": "再現性と倫理",
