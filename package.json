@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/noto-serif-sc": "^5.2.8",
     "framer-motion": "^12.23.24",
     "i18next": "^26.2.0",
     "react": "^19.1.0",

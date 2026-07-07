@@ -75,7 +75,10 @@ export default function SectionFooter({ unitId, sectionId }: SectionFooterProps)
         {prev && prevInfo ? (
           <Link
             to={`/unit/${prev.unitId}/${prev.sectionId}`}
-            className="group flex-1 p-4 rounded-lg border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 transition-all"
+            className="group flex-1 p-4 rounded-xl border-2 border-b-4 border-slate-200 bg-white
+              hover:border-blue-200 hover:bg-blue-50/50
+              active:border-b-2 active:translate-y-[2px]
+              transition-all"
           >
             <div className="text-xs text-slate-400 mb-1">{t('prevSection')}</div>
             <div className="text-sm font-medium text-slate-700 group-hover:text-blue-700 transition-colors">
@@ -90,7 +93,10 @@ export default function SectionFooter({ unitId, sectionId }: SectionFooterProps)
         {next && nextInfo ? (
           <Link
             to={`/unit/${next.unitId}/${next.sectionId}`}
-            className="group flex-1 p-4 rounded-lg border border-slate-200 hover:border-blue-300 hover:bg-blue-50/50 transition-all text-right"
+            className="group flex-1 p-4 rounded-xl border-2 border-b-4 border-slate-200 bg-white
+              hover:border-blue-200 hover:bg-blue-50/50
+              active:border-b-2 active:translate-y-[2px]
+              transition-all text-right"
           >
             <div className="text-xs text-slate-400 mb-1">{t('nextSection')}</div>
             <div className="text-sm font-medium text-slate-700 group-hover:text-blue-700 transition-colors">

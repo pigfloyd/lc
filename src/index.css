@@ -1,3 +1,7 @@
+/* 标题衬线字体：自托管 Noto Serif SC（按 unicode-range 分片，按需加载） */
+@import "@fontsource/noto-serif-sc/600.css";
+@import "@fontsource/noto-serif-sc/700.css";
+
 @import "tailwindcss";
 @import "./styles/theme-dark.generated.css";
 
@@ -6,9 +10,73 @@
    组件通常不需要写 dark: 变体；dark: 变体下看到的也是重映射后的调色板。 */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* ============================================================
+   纸感书页主题（浅色）
+   原理与深色模式相同：Tailwind v4 工具类编译为 var(--color-*)，
+   在 @theme 里重定义变量即可整站换肤，87 个内容组件无需改动。
+   - slate 灰阶 → 暖纸灰（页面底为米白，文字为暖墨色）
+   - blue 强调色 → 靛青墨蓝（降低饱和、压深中段）
+   - 深色模式的变量由 theme-dark.generated.css 在 .dark 下覆盖，不受影响
+   ============================================================ */
 @theme {
   --font-sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
   --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", "Consolas", monospace;
+
+  /* 暖纸灰阶（替换 slate；white 同步微暖以保持 卡片>页面底 的层次） */
+  --color-white: oklch(99.3% 0.004 95);
+  --color-slate-50: oklch(97.7% 0.009 90);
+  --color-slate-100: oklch(95.2% 0.011 90);
+  --color-slate-200: oklch(90.8% 0.013 87);
+  --color-slate-300: oklch(85.3% 0.014 84);
+  --color-slate-400: oklch(65.8% 0.022 75);
+  --color-slate-500: oklch(55.2% 0.024 74);
+  --color-slate-600: oklch(45.6% 0.024 70);
+  --color-slate-700: oklch(38% 0.023 66);
+  --color-slate-800: oklch(29% 0.02 62);
+  --color-slate-900: oklch(22% 0.016 58);
+  --color-slate-950: oklch(15.5% 0.013 58);
+
+  /* 靛青墨蓝（替换 blue；各档相对明度关系与原版一致，配对用法不受影响） */
+  --color-blue-50: oklch(96.9% 0.012 262);
+  --color-blue-100: oklch(93% 0.028 262);
+  --color-blue-200: oklch(87.8% 0.052 262);
+  --color-blue-300: oklch(80% 0.09 262);
+  --color-blue-400: oklch(68.5% 0.14 263);
+  --color-blue-500: oklch(57% 0.17 264);
+  --color-blue-600: oklch(48.5% 0.17 265);
+  --color-blue-700: oklch(42% 0.155 266);
+  --color-blue-800: oklch(36% 0.125 266);
+  --color-blue-900: oklch(31% 0.095 265);
+  --color-blue-950: oklch(22.5% 0.06 265);
+
+  /* 圆角整体上调一档：交互组件更圆润友好 */
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.25rem;
+}
+
+@layer base {
+  /* 书页标题：衬线字（内容区大标题 + 正文排版标题）。
+     带 font-mono / tracking-* 等工具类的标题不受影响（utilities 层优先）。 */
+  main h1,
+  main h2,
+  .content-prose h1,
+  .content-prose h2,
+  .content-prose h3 {
+    font-family: var(--font-serif);
+    letter-spacing: 0.01em;
+  }
+
+  /* 游戏化点缀：所有可点按钮的按压反馈 + 手型光标 */
+  button:not(:disabled) {
+    cursor: pointer;
+    transition: transform 120ms ease;
+  }
+  button:not(:disabled):active {
+    transform: scale(0.96);
+  }
 }
 
 body {
@@ -111,12 +179,12 @@ body {
 }
 
 .sidebar-scroll::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #d3cdc0;
   border-radius: 2px;
 }
 
 .sidebar-scroll::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #a49d8e;
 }
 
 .dark .sidebar-scroll::-webkit-scrollbar-thumb {

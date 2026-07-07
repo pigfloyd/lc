@@ -45,7 +45,7 @@ export default function Sidebar() {
           </button>
         </div>
         <NavLink to="/" onClick={closeSidebar} className="block">
-          <h1 className="text-base font-bold text-slate-800 leading-tight">
+          <h1 className="text-base font-bold font-serif text-slate-800 leading-tight">
             {t('appName')}
           </h1>
           <p className="text-xs text-slate-400 mt-1">{t('appSubtitle')}</p>

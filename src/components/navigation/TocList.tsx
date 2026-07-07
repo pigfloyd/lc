@@ -113,7 +113,7 @@ export default function TocList({ onNavigate }: { onNavigate?: () => void }) {
                 {String(i + 1).padStart(2, '0')}
               </span>
               <span className="min-w-0">
-                <span className="block text-base font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                <span className="block text-base font-semibold font-serif text-slate-800 group-hover:text-blue-600 transition-colors">
                   {unit.title}
                 </span>
                 {unit.question && (
@@ -152,7 +152,7 @@ export default function TocList({ onNavigate }: { onNavigate?: () => void }) {
         <motion.section variants={item} className="pt-6 border-t border-slate-200">
           <div className="flex items-baseline gap-3">
             <span className="w-7 shrink-0" aria-hidden />
-            <span className="block text-base font-semibold text-slate-800">
+            <span className="block text-base font-semibold font-serif text-slate-800">
               {t('appendix')}
             </span>
           </div>

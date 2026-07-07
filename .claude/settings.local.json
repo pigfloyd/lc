@@ -45,7 +45,13 @@
       "WebFetch(domain:pigfloyd.github.io)",
       "Bash(Get-Content *)",
       "Bash(Select-String -Pattern \"export default\" -Context 0,2)",
-      "Bash(python -c ' *)"
+      "Bash(python -c ' *)",
+      "Skill(run)",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
+      "Read(//c/Program Files/Microsoft/Edge/Application/**)",
+      "Bash(npx --no-install playwright --version)",
+      "Bash(npm i *)",
+      "Bash(timeout 30 bash -c 'until curl -sf http://localhost:5173 >/dev/null; do sleep 1; done')"
     ]
   },
   "hooks": {

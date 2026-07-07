@@ -14,8 +14,9 @@
       })();
     </script>
     <style>
-      /* CSS bundle 加载前的兜底背景，避免深色模式下闪白 */
+      /* CSS bundle 加载前的兜底背景，避免深色模式闪白 / 浅色模式闪冷白 */
       html.dark { background: #121212; color-scheme: dark; }
+      html:not(.dark) { background: #f8f5ec; }
     </style>
   </head>
   <body>
