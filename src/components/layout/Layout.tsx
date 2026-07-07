@@ -2,25 +2,34 @@ import { useEffect, useRef, useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSidebarContext } from '../../context/SidebarContext';
-import Sidebar from './Sidebar';
-import SidebarToggle from './SidebarToggle';
 import LanguageSwitcher from '../shared/LanguageSwitcher';
 import ThemeToggle from '../shared/ThemeToggle';
 import ReadingProgress from '../navigation/ReadingProgress';
+import TocOverlay from '../navigation/TocOverlay';
+
+function TocIcon({ className }: { className: string }) {
+  return (
+    <svg className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+  );
+}
 
 export default function Layout() {
   const { t } = useTranslation('common');
-  const { sidebarOpen, closeSidebar, desktopCollapsed, setDesktopCollapsed } = useSidebarContext();
+  const { openToc, closeToc } = useSidebarContext();
   const { pathname } = useLocation();
   const mainRef = useRef<HTMLElement | null>(null);
   const [scrollingDown, setScrollingDown] = useState(false);
 
+  const isHome = pathname === '/';
   const isReadingPage =
     /^\/unit\/[^/]+\/[^/]+/.test(pathname) || /^\/appendix\//.test(pathname);
 
+  // 路由变化时关闭目录浮层（覆盖浏览器前进/后退等场景）
   useEffect(() => {
-    setDesktopCollapsed(isReadingPage);
-  }, [pathname, isReadingPage, setDesktopCollapsed]);
+    closeToc();
+  }, [pathname, closeToc]);
 
   useEffect(() => {
     setScrollingDown(false);
@@ -45,44 +54,54 @@ export default function Layout() {
       {/* Reading progress bar */}
       {isReadingPage && <ReadingProgress target={mainRef} />}
 
-      {/* Mobile overlay */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 z-40 bg-black/40 lg:hidden"
-          onClick={closeSidebar}
-        />
-      )}
+      {/* TOC overlay (closable) */}
+      <TocOverlay />
 
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Desktop floating expand button */}
-      <button
-        onClick={() => setDesktopCollapsed(false)}
-        className={`hidden lg:flex fixed top-4 left-4 z-40 items-center justify-center w-9 h-9 rounded-lg
-          bg-white border border-slate-200 shadow-sm text-slate-500
-          hover:bg-slate-50 hover:text-slate-700 transition-all duration-300
-          ${desktopCollapsed && !scrollingDown ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4 pointer-events-none'}`}
-        aria-label="展开目录"
-        title="展开目录"
+      {/* Desktop floating controls: theme / language / TOC */}
+      <div
+        className={`hidden lg:flex fixed top-4 right-4 z-40 items-center gap-1 h-9 px-1.5 rounded-lg
+          bg-white border border-slate-200 shadow-sm transition-all duration-300
+          ${scrollingDown ? 'opacity-0 translate-x-4 pointer-events-none' : 'opacity-100 translate-x-0'}`}
       >
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-      </button>
+        <ThemeToggle />
+        <LanguageSwitcher />
+        {!isHome && (
+          <button
+            onClick={openToc}
+            className="flex p-1.5 rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors"
+            aria-label={t('openToc')}
+            title={t('openToc')}
+          >
+            <TocIcon className="w-4 h-4" />
+          </button>
+        )}
+      </div>
 
       {/* Main content area */}
       <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Mobile header with toggle — slides away when scrolling down */}
+        {/* Mobile header — slides away when scrolling down */}
         <div
-          className={`flex items-center h-14 px-4 border-b border-slate-200 bg-white lg:hidden shrink-0
+          className={`flex items-center h-14 px-4 lg:hidden shrink-0
             transition-[margin,transform] duration-300 ease-in-out
-            ${scrollingDown ? '-mt-14 -translate-y-full' : 'mt-0 translate-y-0'}`}
+            ${scrollingDown ? '-mt-14 -translate-y-full' : 'mt-0 translate-y-0'}
+            ${isHome ? 'justify-end' : 'border-b border-slate-200 bg-white'}`}
         >
-          <SidebarToggle />
-          <span className="ml-3 text-sm font-semibold text-slate-700 flex-1">
-            {t('appName')}
-          </span>
+          {!isHome && (
+            <span className="text-sm font-semibold text-slate-700 flex-1 truncate">
+              {t('appName')}
+            </span>
+          )}
+          <ThemeToggle />
+          <LanguageSwitcher />
+          {!isHome && (
+            <button
+              onClick={openToc}
+              className="p-2 -mr-2 ml-1 rounded-md text-slate-500 hover:bg-slate-100 hover:text-slate-700 transition-colors"
+              aria-label={t('openToc')}
+            >
+              <TocIcon className="w-5 h-5" />
+            </button>
+          )}
           <ThemeToggle />
           <LanguageSwitcher />
         </div>

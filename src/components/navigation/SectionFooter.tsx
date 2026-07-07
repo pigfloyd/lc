@@ -47,7 +47,7 @@ export default function SectionFooter({ unitId, sectionId }: SectionFooterProps)
           transition={{ type: 'spring', stiffness: 260, damping: 28 }}
           className="mb-6"
         >
-          <Link
+          {/* <Link
             to={`/unit/${next.unitId}/${next.sectionId}`}
             className="group block rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-blue-500 to-indigo-600
               text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30
@@ -67,7 +67,7 @@ export default function SectionFooter({ unitId, sectionId }: SectionFooterProps)
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
             </div>
-          </Link>
+          </Link> */}
         </motion.div>
       )}
 
