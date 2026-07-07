@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 import { getPrevSectionForMode, getAdjacentSectionForMode, useLocalizedUnits, useCurrentUnits } from '../../data/units';
 import { useSidebarContext } from '../../context/SidebarContext';
 
@@ -37,6 +38,39 @@ export default function SectionFooter({ unitId, sectionId }: SectionFooterProps)
 
   return (
     <footer className="mt-16 pt-8 border-t border-slate-200">
+      {/* Immersive "continue reading" hero card */}
+      {next && nextInfo && (
+        <motion.div
+          initial={{ opacity: 0, y: 32, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 28 }}
+          className="mb-6"
+        >
+          <Link
+            to={`/unit/${next.unitId}/${next.sectionId}`}
+            className="group block rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-blue-500 to-indigo-600
+              text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30
+              hover:-translate-y-0.5 transition-all duration-300"
+          >
+            <div className="text-xs font-medium text-blue-100/90 tracking-wide">
+              {t('continueReading')} · {nextInfo.unitTitle}
+            </div>
+            <div className="mt-2 flex items-center justify-between gap-4">
+              <div className="text-lg sm:text-xl font-bold leading-snug">
+                {nextInfo.sectionTitle}
+              </div>
+              <svg
+                className="w-6 h-6 shrink-0 transition-transform duration-300 group-hover:translate-x-1.5"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </div>
+          </Link>
+        </motion.div>
+      )}
+
       <div className="flex justify-between gap-4">
         {prev && prevInfo ? (
           <Link

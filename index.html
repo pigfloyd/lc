@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>语言学量化分析 · 交互式教材</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      // 在首帧渲染前设置主题，避免闪白/闪黑（默认深色）
+      (function () {
+        var light = false;
+        try { light = localStorage.getItem('theme') === 'light'; } catch (e) { /* ignore */ }
+        if (!light) document.documentElement.classList.add('dark');
+      })();
+    </script>
+    <style>
+      /* CSS bundle 加载前的兜底背景，避免深色模式下闪白 */
+      html.dark { background: #121212; color-scheme: dark; }
+    </style>
   </head>
   <body>
     <div id="root"></div>

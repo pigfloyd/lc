@@ -1,4 +1,10 @@
 @import "tailwindcss";
+@import "./styles/theme-dark.generated.css";
+
+/* 深色模式由 html.dark 类驱动（默认深色，见 ThemeContext / index.html 内联脚本）。
+   注意：深色适配靠 theme-dark.generated.css 里的 CSS 变量重映射完成，
+   组件通常不需要写 dark: 变体；dark: 变体下看到的也是重映射后的调色板。 */
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-sans: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
@@ -8,6 +14,17 @@
 body {
   @apply bg-slate-50 text-slate-900 antialiased;
   font-family: var(--font-sans);
+}
+
+:root {
+  color-scheme: light;
+}
+
+/* text-white 几乎总是出现在饱和彩色/深色背景上，深色模式下必须保持白色
+   （背景色板已反转，white 变量本身已映射为深色卡片面色） */
+.dark .text-white,
+.dark .hover\:text-white:hover {
+  color: #fff;
 }
 
 /* Prose-like styling for content areas without the typography plugin */
@@ -100,4 +117,32 @@ body {
 
 .sidebar-scroll::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+.dark .sidebar-scroll::-webkit-scrollbar-thumb {
+  background: #3f3f3f;
+}
+
+.dark .sidebar-scroll::-webkit-scrollbar-thumb:hover {
+  background: #525252;
+}
+
+/* Scroll-linked content fade-in */
+.fade-block {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-block.fade-block-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-block {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

@@ -12,11 +12,14 @@ function getStoredNavMode(): NavMode {
 interface SidebarContextType {
   expandedUnits: Set<string>;
   sidebarOpen: boolean;
+  desktopCollapsed: boolean;
   navMode: NavMode;
   toggleUnit: (unitId: string) => void;
   expandUnit: (unitId: string) => void;
   toggleSidebar: () => void;
   closeSidebar: () => void;
+  setDesktopCollapsed: (collapsed: boolean) => void;
+  toggleDesktopCollapsed: () => void;
   setNavMode: (mode: NavMode) => void;
 }
 
@@ -25,6 +28,7 @@ const SidebarContext = createContext<SidebarContextType | null>(null);
 export function SidebarProvider({ children }: { children: ReactNode }) {
   const [expandedUnits, setExpandedUnits] = useState<Set<string>>(new Set());
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [desktopCollapsed, setDesktopCollapsed] = useState(false);
   const [navMode, setNavModeState] = useState<NavMode>(getStoredNavMode);
 
   const toggleUnit = useCallback((unitId: string) => {
@@ -56,6 +60,10 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
     setSidebarOpen(false);
   }, []);
 
+  const toggleDesktopCollapsed = useCallback(() => {
+    setDesktopCollapsed((prev) => !prev);
+  }, []);
+
   const setNavMode = useCallback((mode: NavMode) => {
     setNavModeState(mode);
     try { localStorage.setItem('navMode', mode); } catch { /* ignore */ }
@@ -64,7 +72,7 @@ export function SidebarProvider({ children }: { children: ReactNode }) {
 
   return (
     <SidebarContext.Provider
-      value={{ expandedUnits, sidebarOpen, navMode, toggleUnit, expandUnit, toggleSidebar, closeSidebar, setNavMode }}
+      value={{ expandedUnits, sidebarOpen, desktopCollapsed, navMode, toggleUnit, expandUnit, toggleSidebar, closeSidebar, setDesktopCollapsed, toggleDesktopCollapsed, setNavMode }}
     >
       {children}
     </SidebarContext.Provider>

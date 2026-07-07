@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useSidebarContext } from '../../context/SidebarContext';
 import { useLocalizedAppendix, useResearchUnits, useToolkitUnits } from '../../data/units';
 import LanguageSwitcher from '../shared/LanguageSwitcher';
+import ThemeToggle from '../shared/ThemeToggle';
 import UnitNavItem from './UnitNavItem';
 import SectionNavItem from './SectionNavItem';
 
@@ -12,7 +13,7 @@ const TAB_TOOLKIT = 'toolkit' as const;
 
 export default function Sidebar() {
   const { t } = useTranslation('common');
-  const { sidebarOpen, closeSidebar, expandUnit, navMode, setNavMode } = useSidebarContext();
+  const { sidebarOpen, closeSidebar, expandUnit, navMode, setNavMode, desktopCollapsed, toggleDesktopCollapsed } = useSidebarContext();
   const researchUnits = useResearchUnits();
   const toolkitUnits = useToolkitUnits();
   const appendixSections = useLocalizedAppendix();
@@ -23,12 +24,26 @@ export default function Sidebar() {
   return (
     <aside
       className={`fixed inset-y-0 left-0 z-50 w-72 bg-white border-r border-slate-200 flex flex-col
-        transform transition-transform duration-300 ease-in-out
-        lg:relative lg:translate-x-0
-        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+        transform transition-[transform,margin] duration-300 ease-in-out
+        lg:relative
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        ${desktopCollapsed ? 'lg:-translate-x-full lg:-ml-72' : 'lg:translate-x-0 lg:ml-0'}`}
     >
       {/* Logo area */}
-      <div className="shrink-0 px-5 py-4 border-b border-slate-100">
+      <div className="shrink-0 px-5 py-4 border-b border-slate-100 relative">
+        <div className="absolute top-3 right-3 flex items-center gap-0.5">
+          <ThemeToggle />
+          <button
+            onClick={toggleDesktopCollapsed}
+            className="hidden lg:flex p-1.5 rounded-md text-slate-400 hover:bg-slate-100 hover:text-slate-600 transition-colors"
+            aria-label="收起目录"
+            title="收起目录"
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+            </svg>
+          </button>
+        </div>
         <NavLink to="/" onClick={closeSidebar} className="block">
           <h1 className="text-base font-bold text-slate-800 leading-tight">
             {t('appName')}

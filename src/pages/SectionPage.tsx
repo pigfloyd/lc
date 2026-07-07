@@ -6,6 +6,8 @@ import { getSectionById } from '../data/contentManifest';
 import { useSidebarContext } from '../context/SidebarContext';
 import Breadcrumb from '../components/navigation/Breadcrumb';
 import SectionFooter from '../components/navigation/SectionFooter';
+import SectionOutline from '../components/navigation/SectionOutline';
+import FadeInContent from '../components/shared/FadeInContent';
 import NotFoundPage from './NotFoundPage';
 
 const VISITED_KEY = 'navigator-visited-sections';
@@ -71,14 +73,17 @@ export default function SectionPage() {
   if (!Component || !section || !unit) return <NotFoundPage />;
 
   return (
-    <div>
+    <div id="section-content">
       <Breadcrumb unitId={unitId} sectionId={sectionId} />
 
       <Suspense fallback={<LoadingSkeleton />}>
-        <Component />
+        <FadeInContent key={`${unitId}/${sectionId}`}>
+          <Component />
+        </FadeInContent>
       </Suspense>
 
       <SectionFooter unitId={unitId} sectionId={sectionId} />
+      <SectionOutline containerId="section-content" />
     </div>
   );
 }
