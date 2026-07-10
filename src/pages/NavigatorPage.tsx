@@ -80,7 +80,7 @@ function ProgressBar({ current, total }: { current: number; total: number }) {
       </div>
       <div className="h-1.5 rounded-full bg-slate-100 overflow-hidden">
         <motion.div
-          className="h-full rounded-full bg-blue-500"
+          className="h-full rounded-full bg-gradient-to-r from-orange-400 via-blue-500 to-blue-500"
           initial={{ width: 0 }}
           animate={{ width: `${pct}%` }}
           transition={{ duration: 0.3 }}
@@ -154,18 +154,28 @@ function QuizView({
           </h2>
 
           <div className="space-y-3 mb-6">
-            {question.options.map((opt) => {
+            {question.options.map((opt, idx) => {
               const isSelected = selectedId === opt.id;
+              const letter = String.fromCharCode(65 + idx);
               return (
                 <button
                   key={opt.id}
                   onClick={() => selectOption(opt.id)}
-                  className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 ${
+                  className={`w-full text-left p-4 rounded-2xl border flex items-center gap-3.5 paper-lift transition-colors duration-200 ${
                     isSelected
-                      ? 'border-blue-400 bg-blue-50 shadow-sm'
-                      : 'border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm'
+                      ? 'border-blue-400 bg-blue-50 shadow-paper-md ring-1 ring-blue-200'
+                      : 'border-slate-200/70 bg-white shadow-paper hover:border-blue-200'
                   }`}
                 >
+                  <span
+                    className={`grid place-items-center w-8 h-8 rounded-lg text-sm font-semibold shrink-0 transition-colors ${
+                      isSelected
+                        ? 'bg-gradient-to-br from-blue-400 to-blue-600 text-white'
+                        : 'bg-slate-100 text-slate-400'
+                    }`}
+                  >
+                    {letter}
+                  </span>
                   <span className="text-sm text-slate-700 leading-relaxed">
                     {opt.label}
                   </span>
@@ -214,7 +224,7 @@ function ResultModuleCard({ mod, visited }: { mod: RecommendedModule; visited: S
   const visitedCount = mod.sections.filter((s) => visited.has(s.sectionId)).length;
 
   return (
-    <div className={`rounded-xl border-2 ${colors} p-5`}>
+    <div className={`rounded-2xl border ${colors} p-5 shadow-paper`}>
       <div className="flex items-center gap-2 mb-1">
         <h3 className="text-base font-semibold text-slate-800">
           {t(mod.moduleTitleKey)}
@@ -280,7 +290,7 @@ function ResultsView({
         transition={{ duration: 0.4 }}
       >
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-100 to-blue-50 ring-1 ring-blue-200/60 shadow-paper mb-4">
             <span className="text-2xl">📋</span>
           </div>
           <h2 className="text-2xl font-bold text-slate-800 mb-2">
@@ -299,7 +309,7 @@ function ResultsView({
             </p>
             <button
               onClick={onRetake}
-              className="px-5 py-2.5 text-sm font-medium text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-colors"
+              className="px-5 py-2.5 text-sm font-medium text-white bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-paper hover:shadow-paper-md transition-shadow"
             >
               重新答题
             </button>
@@ -316,7 +326,7 @@ function ResultsView({
           <div className="text-center space-y-4">
             <Link
               to="/appendix/03-statistics-flowchart"
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-sm text-slate-600 bg-slate-50 border border-slate-200 rounded-lg hover:bg-slate-100 hover:text-slate-800 transition-colors"
+              className="inline-flex items-center gap-2 px-4 py-2.5 text-sm text-slate-600 paper-card paper-lift hover:text-slate-800"
             >
               <span>🗺️</span>
               <span>拿不准用哪种统计检验？试试交互式选择流程图 →</span>

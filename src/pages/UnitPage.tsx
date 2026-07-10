@@ -30,15 +30,15 @@ export default function UnitPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        <div className="mb-2">
-          <span className="text-xs font-medium text-blue-500 tracking-wide">
+        <div className="mb-3">
+          <span className="inline-flex items-center px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-medium tracking-wide">
             {unit.order === 0 ? t('prepLabel') : t('unitLabel', { order: unit.order })}
           </span>
         </div>
         <h1 className="text-3xl font-bold text-slate-900 mb-3">{unit.title}</h1>
         <p className="text-lg text-slate-500 leading-relaxed mb-8">{unit.description}</p>
 
-        <div className="divide-y divide-slate-100 border rounded-xl bg-white overflow-hidden">
+        <div className="paper-card divide-y divide-slate-100/70 overflow-hidden">
           {unit.sections.map((section) => (
             <SectionCard key={section.id} unitId={unit.id} section={section} />
           ))}

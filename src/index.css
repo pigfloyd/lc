@@ -55,6 +55,12 @@
   --radius-lg: 0.625rem;
   --radius-xl: 0.875rem;
   --radius-2xl: 1.25rem;
+
+  /* 暖调纸感投影：偏暖褐、多层柔和，卡片像纸张浮在书桌上。
+     深色模式下由下方 .dark 覆盖为更深的黑投影（暖色投影在暗底看不见）。 */
+  --shadow-paper: 0 1px 2px -1px oklch(40% 0.03 65 / 0.10), 0 4px 10px -3px oklch(40% 0.03 65 / 0.08);
+  --shadow-paper-md: 0 2px 4px -1px oklch(40% 0.03 65 / 0.10), 0 10px 24px -5px oklch(40% 0.03 65 / 0.13);
+  --shadow-paper-lg: 0 4px 8px -2px oklch(40% 0.03 65 / 0.10), 0 20px 44px -10px oklch(40% 0.03 65 / 0.18);
 }
 
 @layer base {
@@ -79,6 +85,74 @@
   }
 }
 
+/* ============================================================
+   编辑部纸感组件层（学术纸感升级）
+   - .paper-card：纸张卡片（暖边框 + 暖投影 + 大圆角）
+   - .paper-lift：悬停抬升微交互
+   - .app-bg / .hero-wash：暖蓝晕染背景
+   复用 orange 作赤陶暖强调色、blue 作靛青主强调色，
+   两者在明暗两套调色板里都有映射，无需自定义色板。
+   ============================================================ */
+@layer components {
+  .paper-card {
+    background-color: var(--color-white);
+    border: 1px solid color-mix(in oklch, var(--color-slate-200) 75%, transparent);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-paper);
+  }
+  .paper-lift {
+    transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 300ms ease, border-color 300ms ease;
+  }
+  .paper-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-paper-lg);
+  }
+}
+
+/* 整页暖底：极淡的暖白→纸灰竖向过渡，铺满视口，内容浮于其上 */
+.app-bg {
+  background-color: var(--color-slate-50);
+  background-image:
+    radial-gradient(120% 55% at 50% -10%,
+      color-mix(in oklch, var(--color-amber-100) 55%, transparent), transparent 60%),
+    radial-gradient(90% 45% at 100% 0%,
+      color-mix(in oklch, var(--color-blue-100) 40%, transparent), transparent 55%);
+  background-attachment: fixed;
+}
+
+/* Hero 晕染：标题区背后柔和的暖橘 + 墨蓝光晕 */
+.hero-wash {
+  position: relative;
+}
+.hero-wash::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 200%;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(50% 55% at 30% 20%,
+      color-mix(in oklch, var(--color-amber-200) 55%, transparent), transparent 70%),
+    radial-gradient(48% 50% at 80% 10%,
+      color-mix(in oklch, var(--color-blue-200) 45%, transparent), transparent 68%);
+  filter: blur(8px);
+  opacity: 0.9;
+}
+
+/* 渐变文字：暖橘→墨蓝，用于 hero 标题点缀 */
+.text-gradient-warm {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-orange-600),
+    var(--color-blue-700) 75%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 body {
   @apply bg-slate-50 text-slate-900 antialiased;
   font-family: var(--font-sans);
@@ -86,6 +160,20 @@ body {
 
 :root {
   color-scheme: light;
+}
+
+/* 深色模式：暖投影在暗底不可见，改用深黑多层投影 + 依赖卡片边框描边 */
+.dark {
+  --shadow-paper: 0 1px 2px -1px rgb(0 0 0 / 0.55), 0 4px 10px -3px rgb(0 0 0 / 0.45);
+  --shadow-paper-md: 0 2px 4px -1px rgb(0 0 0 / 0.55), 0 10px 24px -5px rgb(0 0 0 / 0.5);
+  --shadow-paper-lg: 0 4px 8px -2px rgb(0 0 0 / 0.55), 0 20px 44px -10px rgb(0 0 0 / 0.6);
+}
+.dark .paper-card {
+  border-color: color-mix(in oklch, var(--color-slate-200) 90%, transparent);
+}
+/* 深色下 hero 晕染压暗，避免过曝 */
+.dark .hero-wash::before {
+  opacity: 0.5;
 }
 
 /* text-white 几乎总是出现在饱和彩色/深色背景上，深色模式下必须保持白色
@@ -101,7 +189,16 @@ body {
 }
 
 .content-prose h1 {
-  @apply text-3xl font-bold text-slate-900 mb-6 pb-3 border-b border-slate-200;
+  @apply text-3xl font-bold text-slate-900 mb-6 pb-3;
+  border-style: solid;
+  border-width: 0 0 2px;
+  border-image: linear-gradient(
+      90deg,
+      var(--color-orange-500),
+      var(--color-blue-500) 42%,
+      transparent 78%
+    )
+    1;
 }
 
 .content-prose h2 {
@@ -146,7 +243,7 @@ body {
 }
 
 .content-prose blockquote {
-  @apply border-l-4 border-blue-400 bg-blue-50 px-5 py-3 my-5 rounded-r-lg text-slate-700;
+  @apply border-l-4 border-orange-400 bg-orange-50/60 px-5 py-3 my-5 rounded-r-xl text-slate-700;
 }
 
 .content-prose table {

@@ -50,7 +50,7 @@ export default function Layout() {
   }, [pathname]);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-50">
+    <div className="app-bg flex h-screen overflow-hidden">
       {/* Reading progress bar */}
       {isReadingPage && <ReadingProgress target={mainRef} />}
 
@@ -59,8 +59,8 @@ export default function Layout() {
 
       {/* Desktop floating controls: theme / language / TOC */}
       <div
-        className={`hidden lg:flex fixed top-4 right-4 z-40 items-center gap-1 h-9 px-1.5 rounded-lg
-          bg-white border border-slate-200 shadow-sm transition-all duration-300
+        className={`hidden lg:flex fixed top-4 right-4 z-40 items-center gap-1 h-9 px-1.5 rounded-xl
+          bg-white/85 backdrop-blur border border-slate-200/70 shadow-paper transition-all duration-300
           ${scrollingDown ? 'opacity-0 translate-x-4 pointer-events-none' : 'opacity-100 translate-x-0'}`}
       >
         <ThemeToggle />
@@ -84,7 +84,7 @@ export default function Layout() {
           className={`flex items-center h-14 px-4 lg:hidden shrink-0
             transition-[margin,transform] duration-300 ease-in-out
             ${scrollingDown ? '-mt-14 -translate-y-full' : 'mt-0 translate-y-0'}
-            ${isHome ? 'justify-end' : 'border-b border-slate-200 bg-white'}`}
+            ${isHome ? 'justify-end' : 'border-b border-slate-200/70 bg-white/80 backdrop-blur'}`}
         >
           {!isHome && (
             <span className="text-sm font-semibold text-slate-700 flex-1 truncate">
@@ -102,8 +102,6 @@ export default function Layout() {
               <TocIcon className="w-5 h-5" />
             </button>
           )}
-          <ThemeToggle />
-          <LanguageSwitcher />
         </div>
 
         {/* Scrollable content */}

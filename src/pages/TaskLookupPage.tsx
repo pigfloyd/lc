@@ -120,7 +120,7 @@ export default function TaskLookupPage() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t('taskLookupSearchPlaceholder')}
-            className="w-full pl-10 pr-4 py-3 text-sm rounded-xl border border-slate-200 bg-white
+            className="w-full pl-10 pr-4 py-3.5 text-sm rounded-2xl border border-slate-200/70 bg-white shadow-paper
               placeholder:text-slate-400 focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100 transition-all"
           />
         </div>
@@ -143,17 +143,19 @@ export default function TaskLookupPage() {
         <motion.div variants={container} initial="hidden" animate="show" className="space-y-8">
           {filtered.map((group) => (
             <motion.section key={group.id} variants={item}>
-              <h2 className="flex items-center gap-2 text-base font-semibold text-slate-800 mb-3">
-                <span>{group.icon}</span>
+              <h2 className="flex items-center gap-2.5 text-base font-semibold text-slate-800 mb-3">
+                <span className="grid place-items-center w-8 h-8 rounded-lg bg-white border border-slate-200/70 shadow-paper text-base shrink-0">
+                  {group.icon}
+                </span>
                 <span>{group.title}</span>
                 <span className="text-xs font-normal text-slate-400">
                   {t('taskLookupTasksCount', { count: group.tasks.length })}
                 </span>
               </h2>
 
-              <div className="divide-y divide-slate-100 border border-slate-200 rounded-xl bg-white overflow-hidden">
+              <div className="paper-card divide-y divide-slate-100/70 overflow-hidden">
                 {group.tasks.map((task) => (
-                  <div key={task.id} className="px-4 py-3.5">
+                  <div key={task.id} className="px-4 py-3.5 hover:bg-slate-50/60 transition-colors">
                     <div className="text-sm font-medium text-slate-700 mb-2">{task.label}</div>
                     <div className="flex flex-wrap gap-1.5">
                       {task.sections.map((s) => (
