@@ -186,6 +186,6 @@ AI 生成的教程内容必须尽可能简单易懂。使用动画、交互、�
 - `i18next` + `react-i18next` — 国际化
 - 无状态管理库 — `SidebarContext` 是唯一的共享状态
 
-### 点子
+<!-- ### 点子
 
-- 教程模式可以参考：https://www.xiaohongshu.com/explore/6a3a767a00000000110184ee?app_platform=ios&app_version=9.34.4&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBxdF1QuWbg0CgeQ_Tgo0PVXrwh2YpFd0FrnfB14ISfpk=&author_share=1&xhsshare=WeixinSession&shareRedId=OD84QTc6OTw2NzUyOTgwNjhFOTg9O0xN&apptime=1782303916&share_id=81d526d8f6bd4f47a11704f51249ceb2&wechatWid=105278e7f47eadbc4ad8b5c71c8eaed7&wechatOrigin=menu
+- 教程模式可以参考：https://www.xiaohongshu.com/explore/6a3a767a00000000110184ee?app_platform=ios&app_version=9.34.4&share_from_user_hidden=true&xsec_source=app_share&type=video&xsec_token=CBxdF1QuWbg0CgeQ_Tgo0PVXrwh2YpFd0FrnfB14ISfpk=&author_share=1&xhsshare=WeixinSession&shareRedId=OD84QTc6OTw2NzUyOTgwNjhFOTg9O0xN&apptime=1782303916&share_id=81d526d8f6bd4f47a11704f51249ceb2&wechatWid=105278e7f47eadbc4ad8b5c71c8eaed7&wechatOrigin=menu -->

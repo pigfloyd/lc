@@ -139,7 +139,7 @@ export default function TocList({ onNavigate }: { onNavigate?: () => void }) {
               onClick={onNavigate}
               className="group flex items-start gap-4"
             >
-              <span className="grid place-items-center w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 text-white font-serif font-bold text-lg shadow-sm">
+              <span className="grid place-items-center w-11 h-11 shrink-0 rounded-xl bg-gradient-to-br from-blue-400 to-blue-600 text-white font-serif font-bold text-lg shadow-sm">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <span className="min-w-0 flex-1">
